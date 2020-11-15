@@ -1,0 +1,22 @@
+body {
+    margin: 10px !important;
+}
+
+.card {
+    background-color: #DDDDDD !important;
+}
+
+.code {
+    font-family: 'Source Code Pro', monospace;
+    color: rgb(43, 84, 85);
+}
+
+.outputs {
+    font-family: 'Source Code Pro', monospace;
+    color: rgb(96, 134, 240);
+}
+
+.comments {
+    font-family: 'Source Code Pro', monospace;
+    color: rgb(21, 134, 72);
+}
