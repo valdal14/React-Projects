@@ -20,3 +20,7 @@ body {
     font-family: 'Source Code Pro', monospace;
     color: rgb(21, 134, 72);
 }
+
+img {
+    max-width: 100%;
+}

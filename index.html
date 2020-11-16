@@ -60,6 +60,49 @@
         <p class="comments">// Importing jQuery - Popper - Bootstrap.js</p> <br>
         <img src="/images/imports.png" alt="imports" srcset=""> <br>
     </div> <br><br>
+
+    <div class="container">
+        <p><h4>The Bootstrap GRID System</h4></p> <br>
+        <p>We first start by adding the following tag inside each HTML page</p>
+        <p>
+            <img src="/images/viewport.png" alt="viewport" srcset="">
+        </p>
+        <p>
+            <ol>
+                <li>Bootstrap 4 support for mobile-first is supported by Flexbox style</li>
+                <li>Each row in a grid is divided into 12 columns</li>
+                <ul>
+                    <li>.col-*</li>
+                    <li>.col-sm-*</li>
+                    <li>.col-md-*</li>
+                    <li>.col-lg-*</li>
+                </ul>
+            </ol>
+        </p>
+
+        <p>
+            <img src="/images/gridsystem.png" alt="Grid System" srcset="">
+        </p>
+        <p>
+            I.E: <b>col-12 col-sm-6</b> means that for extra-small VPs the content would be 12 columns while starting from small up to XL viewport the content will be 6 columns 
+        </p>
+        <p>
+            I.E: <b>col-12 col-sm-4 col-md-3</b> means that for extra-small VPs the content would be 12 columns, while from small up to medium would be 4 and from medium up to extra large VPs would be 3 columns
+        </p>
+        <p>
+            If inside a RAW div we have the following: <br>
+            <b>col-sm-4 col-md-3</b> <br>
+            <b>col col-sm col-md</b> <br>
+            col col-sm col-md means that we will occupy the remaining space left
+        </p>
+
+        <p><b>col-auto</b> will automatically manage the space or ramining portion in the GRID that must be filled</p>
+
+        <p><b>order-sm-last</b> & <b>order-sm-last</b> can be applied to any div to position elements</p>
+
+        <p><b>offset-1</b> will use an eventual column left empty automatically</p>
+    </div>
+
     <!-- BOOSTRAP -->
     
     <div class="jumbotron">
