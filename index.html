@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>React Training</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
@@ -133,6 +135,58 @@
 
         <p>
             <img src="images/breadcrumb.png" alt="breadcrumb">
+        </p>
+
+        <p><h4>Bootstrap Icon Fonts</h4></p> <br>
+        <p class="comments">
+            We will be using fontawsome and some Bootstrap icons to insert icons inside our project.
+        </p>
+        <p class="code">
+            npm install @fortawesome/fontawesome-free --save
+        </p>
+        <p class="comments">
+            // After the installation we can add it to our HTML page
+            // ../node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css
+        </p>
+
+        <p class="code">
+            <b>fa fa-home fa-lg</b> inside a class inside a span tag to show an icon <br>
+            <p class="code">
+                I:E: <a href="#"><span class="fa fa-home fa-lg"></span> Home</a>
+            </p>
+        </p>
+
+        <p class="comments">
+            // For social icons we do it like this:
+        </p>
+        <p class="code">
+            I.E: <b>fab fa-google-plus fa-lg</b> <i class="fab fa-google-plus fa-lg"></i>
+        </p>
+
+        <p class="comments">
+            // Install Bootstrap Social
+            // ../node_modules/bootstrap-social/bootstrap-social.css
+        </p>
+        <p class="code">
+            npm i bootstrap-social --save
+        </p>
+        <p class="comments">
+            // Use the Bootstrap Social
+            <b>btn btn-social-icon btn-google</b> <br>
+            I.E: <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fab fa-google-plus fa-lg"></i></a>
+        </p>
+
+        <p>
+            <textarea name="social" id="social" cols="100" rows="15" class="code">
+                <div class="text-center">
+                    <a class="btn btn-social-icon btn-google" href="http://google.com/+"><i class="fab fa-google-plus fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-facebook" href="http://www.facebook.com/profile.php?id="><i class="fab fa-facebook fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-linkedin" href="http://www.linkedin.com/in/"><i class="fab fa-linkedin fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-twitter" href="http://twitter.com/"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a class="btn btn-social-icon btn-google" href="http://youtube.com/"><i class="fab fa-youtube fa-lg"></i></a>
+                    <a class="btn btn-social-icon" href="mailto:"><i class="fas fa-envelope-open-text fa-lg"></i></a>
+                </div>
+            </textarea>
         </p>
 
         
