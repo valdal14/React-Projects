@@ -22,8 +22,8 @@
             <li><a href="#gitSection">GIT</a></li>
             <li><a href="#bootstrapSection">Bootstrap</a></li>
             <li><a href="#cssSection">CSS Preprocessors</a></li>
-            
             <li><a href="#buldingProjects">Building & Deployment</a></li>
+            <li><a href="#taskRunner">Task Runners</a></li>
             <li><a href="#reactSection">React JS</a></li>
         </ol>
     </div>
@@ -886,7 +886,7 @@
                 </ol>
                 <li>Then, set up the following script:</li>
                 <ol>
-                    <li><b>"imagemin": "imagemin img/* --out-dir='dist/img'"</b></li>
+                    <li><b>"imagemin": "imagemin 6-Boostrap-Training/img/* --out-dir='dist/img'"</b></li>
                 </ol>
                 <li><b>NOTE</b> students have encountered issues with imagemin-cli not installing its plugins due to issues with global permissions on Mac. In that case try:</li>
                 <ol>
@@ -954,16 +954,25 @@
                     "watch:all": "parallelshell 'npm run watch:scss' 'npm run start'",
                     "clean": "rimraf dist",
                     "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
-                    "imagemin": "imagemin img/* --out-dir='dist/img'",
+                    "imagemin": "imagemin 6-Boostrap-Training/img/* --out-dir='dist/img'",
                     "usemin": "usemin 6-Boostrap-Training/contactus.html -d dist --htmlmin -o dist/contactus.html && usemin 6-Boostrap-Training/aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin 6-Boostrap-Training/index.html -d dist --htmlmin -o dist/index.html",
                     "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
-                  },
+                  }
             </textarea>
-        </p>
+        </p> <br>
+    </div>
+    <!-- END OF Building and Deployment -->
 
+
+    <!-- TASK RUNNERS -->
+    <div class="jumbotron" id="taskRunner">
+        <h1>Building and Deployment: Task Runners:</h1>
     </div>
 
-    <!-- END OF Building and Deployment -->
+    <div class="container">
+        FROM HERE
+    </div>
+    <!-- END OF TASK RUNNERS -->
 
     <!-- REACT -->
     <div class="jumbotron" id="reactSection">
