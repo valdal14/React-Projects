@@ -13,6 +13,21 @@
 <body>
 
     <div class="jumbotron">
+        <h1>FullStack JS Training</h1>
+    </div>
+
+    <div class="container">
+        <h2>Agenda</h2> <br>
+        <ol>
+            <li><a href="#gitSection">GIT</a></li>
+            <li><a href="#bootstrapSection">Bootstrap</a></li>
+            <li><a href="#cssSection">CSS Preprocessors</a></li>
+            <li><a href="#reactSection">React JS</a></li>
+        </ol>
+    </div>
+
+    <!-- GIT -->
+    <div class="jumbotron" id="gitSection">
         <h1>Git Commands</h1>
     </div>
 
@@ -40,9 +55,10 @@
         <p class="comments">// push a local repo files to the a remote repo</p>
         <p class="code">git push -u origin master</p>
     </div>
+    <!-- END OF GIT -->
 
     <!-- BOOSTRAP -->
-    <div class="jumbotron">
+    <div class="jumbotron" id="bootstrapSection">
         <h1>Bootstrap Training</h1>
     </div>
 
@@ -407,7 +423,7 @@
         <p class="comments">
             // Carousel example <br><br>
             <textarea name="" id="" cols="110" rows="50" class="code">
-                <!-- CAROUSEL -->
+                 <!-- CAROUSEL -->
         <div class="row row-content">
             <div class="col">
                 <div id="mycarousel" class="carousel slide" data-ride="carousel">
@@ -440,6 +456,14 @@
                     <a class="carousel-control-next" href="#mycarousel" role="button" data-slide="next">
                         <span class="carousel-control-next-icon"></span>
                     </a>
+                    <div class="btn-group" id="carouselButton">
+                        <button class="btn btn-danger btn-sm" id="carousel-pause">
+                            <span class="fa fa-pause"></span>
+                        </button>
+                        <button class="btn btn-danger btn-sm" id="carousel-play">
+                            <span class="fa fa-play"></span>
+                        </button>
+                    </div>
                 </div>
              </div>
         </div>
@@ -461,14 +485,200 @@
                     left: 0;
                     min-height: 300px;
                 }
+
+                #carouselButton {
+                    right:0px;
+                    position: absolute;
+                    bottom: 0px;
+                    z-index: 1;
+                }
+            </textarea>
+        </p>
+
+        <p class="comments">
+            // JS <br><br>
+            <textarea name="" id="" cols="90" rows="10">
+                $(document).ready(function(){
+                    $("#mycarousel").carousel( { interval: 2000 } );
+                    $("#carousel-pause").click(function(){
+                        $("#mycarousel").carousel('pause');
+                    });
+                    $("#carousel-play").click(function(){
+                        $("#mycarousel").carousel('cycle');
+                    });
+                });
             </textarea>
         </p>
 
     </div>
-
-    <!-- BOOSTRAP -->
+    <br>
+    <!-- END OF BOOSTRAP -->
     
-    <div class="jumbotron">
+    <!-- CSS Preprocessors -->
+    <div class="jumbotron" id="cssSection">
+        <h1>CSS Preprocessors</h1>
+    </div>
+
+    <div class="container">
+        <h4>Less & Sass</h4>
+
+        <p class="comments">
+            Css is tradionally limited when it comes to features like defining variables, nesting selectors, expressions and functions and maintenability is a mess. <br>
+            <img src="images/csspre-processors.png" alt="css pre-processors" srcset="">
+        </p>
+
+        <p class="code">
+            <h5>Less styles</h5> <br>
+            // variables <br>
+            @it-grey: #dddddd; <br>
+            @background-dark: #512DA8; <br>
+            @carousel-item-height: 300px; <br> <br>
+            // functions <br>
+            .navbar-inverse { <br>
+                background: @background-dark; <br>
+            } <br> <br>
+
+            // variable can also have scope
+        </p>
+
+        <p class="code">
+            <h5>Less styles</h5> <br>
+            // variables <br>
+            $it-grey: #dddddd; <br>
+            $background-dark: #512DA8; <br>
+            $carousel-item-height: 300px; <br> <br>
+            // functions <br>
+            .navbar-inverse { <br>
+                background: $background-dark; <br>
+            } <br> <br>
+
+            // variable can also have scope
+        </p>
+
+        <p>
+            <img src="images/nesting.png" alt="nesting" srcset="">
+        </p>
+
+        <p>
+            <img src="images/mixins.png" alt="mixins" srcset="">
+        </p>
+
+        <p>
+            <img src="images/mixins-params.png" alt="mixins with params" srcset="">
+        </p>
+
+        <p>
+            <img src="images/maths.png" alt="math operations" srcset="">
+        </p>
+
+        <p>
+            <img src="images/others.png" alt="addiotional functionalities" srcset="">
+        </p>
+
+        <p class="comments">
+            <h5>Exercise with Less</h5> <br>
+            <ol>
+                <li>First let's make a backup copy of the style.css inside the 6-Boostrap-Training folder: <b>styles-old.css</b></li>
+                <li>Create a new file called styles.less (code sample below)</li> 
+                <li><b>npm install -g less</b></li>
+                <li>Compile from inside the css folder location with: <b>lessc styles.less styles.css</b></li> <br>
+
+                <textarea name="" id="" cols="90" rows="40" class="code">
+                    // Variables
+                    @lt-gray: #dddddd;
+                    @background-dark: #512BA8 !important;
+                    @background-light: #9575CD !important;
+                    @background-pale: #D1C4E9 !important;
+                    
+                    @carousel-item-height: 300px;
+                    
+                    // Mixins
+                    .zero-margin (@pad-up-down: 0px, @pad-left-right: 0px) {
+                        margin: 0 auto;
+                        padding: @pad-up-down @pad-left-right;
+                    }
+                    
+                    // CSS Classes
+                    .row-header{
+                        .zero-margin();
+                    }
+                    
+                    .row-content {
+                        .zero-margin(50px,0px);
+                        border-bottom: 1px ridge;
+                        min-height:400px;
+                    }
+                    
+                    .footer{
+                        background-color: @background-pale;
+                        .zero-margin(20px, 0px);
+                    }
+                    
+                    .jumbotron {
+                        .zero-margin(70px,30px);
+                        background: @background-light ;
+                        color:floralwhite;
+                    }
+                    
+                    address{
+                        font-size:80%;
+                        margin:0px;
+                        color:#0f0f0f;
+                    }
+                    
+                    body{
+                        padding:50px 0px 0px 0px;
+                        z-index:0;
+                    }
+                    
+                    .navbar-dark {
+                         background-color: @background-dark;
+                    }
+                    
+                    .tab-content {
+                        border-left: 1px solid @lt-gray;
+                        border-right: 1px solid @lt-gray;
+                        border-bottom: 1px solid @lt-gray;
+                        padding: 10px;
+                    }
+                    
+                    .carousel {
+                        background:@background-dark;
+                    
+                        .carousel-item {
+                            height: @carousel-item-height;
+                            img {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                min-height: 300px;
+                            }
+                        }
+                    }
+                    
+                    #carouselButton {
+                        right:0px;
+                        position: absolute;
+                        bottom: 0px;
+                        z-index: 1;
+                    }
+                    
+                    .radious {
+                        display: inline;
+                        margin: 0 auto;
+                        padding-right: 20px;
+                    }
+                    
+                    
+                </textarea>
+            </ol>
+        </p>
+
+    </div>
+    <!-- END OF CSS Preprocessors-->
+
+    <!-- REACT -->
+    <div class="jumbotron" id="reactSection">
         <h1>ReactJS Training</h1>
     </div>
 
@@ -480,6 +690,8 @@
             <li><a href="./5-StateManagement/index.html">State Management</a></li>
         </ol>
     </div>
+    <!-- END OF REACT -->
+
 </body>
 <!-- SCRIPTS SECTION -->
 <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
