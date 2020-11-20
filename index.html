@@ -23,6 +23,7 @@
             <li><a href="#bootstrapSection">Bootstrap</a></li>
             <li><a href="#cssSection">CSS Preprocessors</a></li>
             <li><a href="#reactSection">React JS</a></li>
+            <li><a href="#buldingProjects">Building & Deployment</a></li>
         </ol>
     </div>
 
@@ -771,8 +772,70 @@
             </ol>
         </p>
 
-    </div>
+    </div> <br>
     <!-- END OF CSS Preprocessors-->
+
+    <!-- Building and Deployment -->
+    <div class="jumbotron" id="buldingProjects">
+        <h1>Building and Deployment</h1>
+    </div>
+
+    <div class="container">
+        <p class="comments">
+            <h5>CSS TASKS</h5> <br>
+            <ol>
+                <li>Compiling Less or Sass</li>
+                <li>Running Autoprefixzer to add any vendor prefixes that are needed (Browser compatibilities)</li>
+                <li>CSS Minification</li>
+                <li>Concatenation</li>
+            </ol>
+        </p>
+        <br>
+        <p class="comments">
+            <h5>JAVASCRIPT TASKS</h5> <br>
+            <ol>
+                <li><b>JSHint:</b> Checking JS code for errors and potential problems (static code analysis)</li>
+                <li>Concatenation</li>
+                <li>JS Uglyfication or Minification</li>
+                <li>Check for errors again</li>
+            </ol>
+        </p>
+        <br>
+        <p class="comments">
+            <h5>OTHERS TASKS</h5> <br>
+            <ol>
+                <li><b>Images:</b> filesize optimization</li>
+                <li><b>Watch:</b> Watching for changes in files and automatically rerunning tasks</li>
+                <li>Server and Live-reload</li>
+                <li>Testing</li>
+                <li>Build the site for Deployment</li>
+            </ol>
+        </p>
+        <br>
+        <p class="comments">
+            <h6>Working with NPM Scripts</h6>
+            <p class="code"><b>npm run</b> could be useful to run our own scripts</p>
+            <p>In this example we will:</p>
+            <ol>
+                <li>Watch for changes to the styles.scss file and automatically compile it to the css file</li>
+                <li>Run multiple NPM scripts in parallel using parallelshell NPM module.</li>
+            </ol>
+            <p>Let's start</p>
+            <ol>
+                <li>Frst, we install two NPM packages onchange and parallelshell as follows:</li>
+                <ol>
+                    <li><b>npm install onchange parallelshell --save-dev</b></li>
+                </ol>
+                <li>Add the following to our package.json scripts sections:</li>
+                <ol>
+                    <li><b> "watch:less": "onchange 'css/*.less' -- npm run lessc styles.less styles.css"</b></li>
+                    <li><b></b></li>
+                </ol>
+            </ol>
+        </p>
+    </div>
+
+    <!-- END OF Building and Deployment -->
 
     <!-- REACT -->
     <div class="jumbotron" id="reactSection">
