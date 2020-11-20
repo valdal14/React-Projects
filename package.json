@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "./node_modules/.bin/nodemon index.js",
-    "watch:scss": "onchange '/6-Boostrap-Training/*.scss' -- npm run scss",
-    "scss": "node-sass -o 6-Boostrap-Training/ 6-Boostrap-Training/"
+    "scss": "node-sass -o 6-Boostrap-Training/ 6-Boostrap-Training/",
+    "watch:scss": "onchange '6-Boostrap-Training/*.scss' -- npm run scss",
+    "watch:all": "parallelshell 'npm run watch:scss' 'npm run start'"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,6 @@
     "node-sass": "^5.0.0",
     "nodemon": "^2.0.6",
     "onchange": "^7.1.0",
-    "parallelshell": "^3.0.2"
+    "parallelshell": "^3.0.1"
   }
 }
