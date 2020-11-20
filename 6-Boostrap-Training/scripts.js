@@ -7,3 +7,18 @@ $(document).ready(function(){
         $("#mycarousel").carousel('cycle');
     });
 });
+
+document.querySelector('#modalLoginTrigger').addEventListener('click', function(e){
+    e.preventDefault();
+    $('#loginModal').modal({
+        show: true
+    }); 
+})
+
+document.querySelector('#reservationModalTrigger').addEventListener('click', function(e){
+    e.preventDefault();
+    $('#reservationModal').modal({
+        show: true
+    }); 
+})
+

@@ -60,3 +60,16 @@ body {
   margin: 0 auto;
   padding-right: 20px;
 }
+.modal-content {
+  background-color: #D1C4E9 !important;
+}
+.modal-content .modal-header {
+  color: aliceblue;
+  background-color: #512BA8 !important;
+}
+.modal-content .modal-header button {
+  color: aliceblue;
+}
+.modal-content .modal-body {
+  background-color: #D1C4E9 !important;
+}
