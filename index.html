@@ -814,7 +814,7 @@
         </p>
         <br>
         <p class="comments">
-            <h6>Working with NPM Scripts</h6>
+            <h5>Working with NPM Scripts</h5>
             <p class="code"><b>npm run</b> could be useful to run our own scripts</p>
             <p>In this example we will:</p>
             <ol>
@@ -834,7 +834,133 @@
                     <li><b>"watch:all": "parallelshell 'npm run watch:scss' 'npm run start'"</b></li>
                 </ol>
             </ol>
+            <br>
+            <p class="comments">
+                // Entire start script executed with <b>npm run watch:all</b> <br>
+                <textarea name="" id="" cols="100" rows="8" class="code">
+                    "scripts": {
+                        "test": "echo \"Error: no test specified\" && exit 1",
+                        "start": "./node_modules/.bin/nodemon index.js",
+                        "scss": "node-sass -o 6-Boostrap-Training/ 6-Boostrap-Training/",
+                        "watch:scss": "onchange '6-Boostrap-Training/*.scss' -- npm run scss",
+                        "watch:all": "parallelshell 'npm run watch:scss' 'npm run start'"
+                      },
+                </textarea>
+            </p>
+        </p> <br>
+
+        <p>
+            <h5>Cleaning up a Distribution Folder</h5> <br>
+            <ol>
+                <li>Install the rimraf npm module by typing the following at the prompt:</li>
+                <ol>
+                    <li><b>npm install rimraf --save-dev</b></li>
+                </ol>
+                <li>Then, set up the following script:</li>
+                <ol>
+                    <li><b>"clean": "rimraf dist"</b></li>
+                </ol>
+            </ol>
+        </p> <br>
+
+        <p>
+            <h5>Copying Fonts</h5> <br>
+            <ol>
+                <li>Your project uses font-awesome fonts. These need to be copied to the distribution folder. To help us do this, install the copyfiles NPM module globally as follows:</li>
+                <ol>
+                    <li><b>sudo npm -g install copyfiles</b></li>
+                </ol>
+                <li>Then, set up the following script:</li>
+                <ol>
+                    <li><b>"copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts"</b></li>
+                </ol>
+            </ol>
+        </p> <br>
+
+        <p>
+            <h5>Compressing and Minifying Images</h5> <br>
+            <ol>
+                <li>We use the <b>imagemin-cli</b> NPM module to help us to compress our images to reduce the size of the images being used in our project. Install the imagemin-cli module as follows:</li>
+                <ol>
+                    <li><b>sudo npm -g install imagemin-cli</b></li>
+                </ol>
+                <li>Then, set up the following script:</li>
+                <ol>
+                    <li><b>"imagemin": "imagemin img/* --out-dir='dist/img'"</b></li>
+                </ol>
+                <li><b>NOTE</b> students have encountered issues with imagemin-cli not installing its plugins due to issues with global permissions on Mac. In that case try:</li>
+                <ol>
+                    <li><b>sudo npm install -g imagemin-cli@3.0.0 --unsafe-perm=true --allow-root</b></li>
+                </ol>
+            </ol>
+        </p> <br>
+
+        <p>
+            <h5>Preparing the Distribution Folde</h5> <br>
+            <ol>
+                <li>Open .gitignore and update it as follows. We do not want the dist folder to be checked into the git repository.</li>
+                <ol>
+                    <li><b>node_modules</b></li>
+                    <li><b>dist</b></li>
+                </ol>
+                <li>Then, install the usemin-cli, cssmin, uglifyjs and htmlmin NPM packages as follows:</li>
+                <ol>
+                    <li><b>npm install usemin-cli cssmin uglifyjs htmlmin --save-dev</b></li>
+                </ol>
+                <li>Add the following two scripts to the package.json file:</li>
+                <ol>
+                    <li><b>"usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",</b></li>
+                    <li><b>"build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"</b></li>
+                </ol>
+                <li>Open index.html and surround the css links inclusion code as follows:</li>
+                <ol>
+                    <li>
+                        <textarea name="" id="" cols="100" rows="10">
+                             <!-- build:css css/main.css -->
+                            <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+                            <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+                            <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+                            <link href="css/styles.css" rel="stylesheet">
+                            <!-- endbuild -->
+                        </textarea>
+                    </li>
+                </ol>
+                <li>Similarly, open index.html and surround the js script inclusion code as follows:</li>
+                <ol>
+                    <li>
+                        <textarea name="" id="" cols="100" rows="10">
+                             <!-- build:js js/main.js -->
+                            <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+                            <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+                            <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+                            <script src="js/scripts.js"></script>
+                            <!-- endbuild -->
+                        </textarea>
+                    </li>
+                </ol>
+                <li>Do the same change in aboutus.html and contactus.html</li>
+                <li><b>npm run build</b></li>
+            </ol>
+        </p> <br>
+
+        <p class="comments">
+            // ENTIRE SCRIPT <br>
+            <textarea name="" id="" cols="120" rows="15">
+                "scripts": {
+                    "test": "echo \"Error: no test specified\" && exit 1",
+                    "start": "./node_modules/.bin/nodemon index.js",
+                    "scss": "node-sass -o 6-Boostrap-Training/ 6-Boostrap-Training/",
+                    "watch:scss": "onchange '6-Boostrap-Training/*.scss' -- npm run scss",
+                    "watch:all": "parallelshell 'npm run watch:scss' 'npm run start'",
+                    "clean": "rimraf dist",
+                    "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
+                    "imagemin": "imagemin img/* --out-dir='dist/img'",
+                    "usemin": "usemin 6-Boostrap-Training/contactus.html -d dist --htmlmin -o dist/contactus.html && usemin 6-Boostrap-Training/aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin 6-Boostrap-Training/index.html -d dist --htmlmin -o dist/index.html",
+                    "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin"
+                  },
+            </textarea>
         </p>
+
     </div>
 
     <!-- END OF Building and Deployment -->
