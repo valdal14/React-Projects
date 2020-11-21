@@ -1058,6 +1058,68 @@ module.exports = function (grunt) {
         </ol>
     </p> <br>
 
+    <p class="comments">
+        We will configure the browser-sync and watch tasks by adding the following code to the Grunt file. <br>
+        <textarea name="" id="" cols="100" rows="30" class="code">
+'use strict';
+
+module.exports = function (grunt) {
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
+
+    // Automatically load required Grunt tasks
+    require('jit-grunt')(grunt);
+
+    const sass = require('node-sass');
+
+    // Define the configuration for all the tasks
+    grunt.initConfig({
+        sass: {
+            options: {
+                implementation: sass,
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    './6-Boostrap-Training/styles.css': './6-Boostrap-Training/styles.scss'
+                }
+            }
+        },watch: {
+            files: './6-Boostrap-Training/*.scss',
+            tasks: ['sass']
+        },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        './6-Boostrap-Training/*.css',
+                        '*.html',
+                        './6-Boostrap-Training/*.js'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: "./6-Boostrap-Training/"
+                    }
+                }
+            }
+        }
+    });
+
+    grunt.registerTask('default', ['browserSync', 'watch']);
+
+};
+        </textarea>
+    </p> <br>
+
+    <p class="comments">
+        // finally we run the following command: <br>
+        <p class="code">
+            <b>grunt</b>
+        </p>
+    </p>
+
     </div>
     <!-- END OF TASK RUNNERS -->
 

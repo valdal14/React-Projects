@@ -18,12 +18,32 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    '6-Boostrap-Training/styles.css': '6-Boostrap-Training/styles.scss'
+                    './6-Boostrap-Training/styles.css': './6-Boostrap-Training/styles.scss'
+                }
+            }
+        },watch: {
+            files: './6-Boostrap-Training/*.scss',
+            tasks: ['sass']
+        },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        './6-Boostrap-Training/*.css',
+                        '*.html',
+                        './6-Boostrap-Training/*.js'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: "./6-Boostrap-Training/"
+                    }
                 }
             }
         }
     });
 
-    grunt.registerTask('css', ['sass']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
 
 };
