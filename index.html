@@ -1100,13 +1100,14 @@ module.exports = function (grunt) {
                 options: {
                     watchTask: true,
                     server: {
-                        baseDir: "./6-Boostrap-Training/"
+                        baseDir: "./"
                     }
                 }
             }
         }
     });
 
+    grunt.registerTask('css', ['sass']);
     grunt.registerTask('default', ['browserSync', 'watch']);
 
 };
@@ -1118,7 +1119,420 @@ module.exports = function (grunt) {
         <p class="code">
             <b>grunt</b>
         </p>
+    </p> <br>
+
+    <h4>Copying the Files and Cleaning Up the Dist Folder</h4> <br>
+
+    <p class="comments">
+        // Next you will install the Grunt modules to copy over files to a distribution folder named dist, and clean up the dist folder when needed. To do this, install the following Grunt modules: <br>
+        <ol>
+            <li><b>npm install grunt-contrib-copy --save-dev</b></li>
+            <li><b>npm install grunt-contrib-clean --save-dev</b></li>
+        </ol>
+    </p> <br>
+
+    <p class="comments">
+        // add the code to perform the copying of files to the dist folder, and cleaning up the dist folder. To do this, add the following code to Gruntfile.js. This should be added right after the configuration of the <b>SASS</b> task.: <br>
+        <textarea name="" id="" cols="100" rows="30" class="code">
+,copy: {
+    html: {
+        files: [
+        {
+            //for html
+            expand: true,
+            dot: true,
+            src: ['*.html', '*.css', '*.js'],
+            src: ['*.html'],
+            dest: 'dist'
+        }]                
+    },
+    fonts: {
+        files: [
+        {
+            //for font-awesome
+            expand: true,
+            dot: true,
+            cwd: 'node_modules/font-awesome',
+            src: ['fonts/*.*'],
+            dest: 'dist'
+        }]
+    },
+    images: {
+        files: [
+            {
+                expand: true,
+                dot: true,
+                cwd: './6-Boostrap-Training/img',
+                src: ['*.png'],
+                dest: 'dist/img'
+            }
+        ]
+    }
+},
+clean: {
+    build: {
+        src: [ 'dist/']
+    }
+}
+        </textarea>
+    </p> <br>
+
+    <h4>Compressing and Minifying Images</h4> <br>
+
+    <p class="comments">
+        // Next we install the grunt-contrib-imagemin module and use it to process the images. <br>
+        <ol>
+            <li><b>npm install grunt-contrib-imagemin@2.0.1 --save-dev</b></li>
+        </ol> <br>
+        // Then, configure the imagemin task as shown below in the Gruntfile <br>
+        <textarea name="" id="" cols="100" rows="10" class="code">
+imagemin: {
+    dynamic: {
+        files: [{
+            expand: true,                     // Enable dynamic expansion
+            cwd: './6-Boostrap-Training',    // Src matches are relative to this path
+            src: ['img/*.{png,jpg,gif}'],   // Actual patterns to match
+            dest: 'dist/'                  // Destination path prefix
+        }]
+    }
+}
+        </textarea>
+    </p> <br>
+
+    <h4>Preparing the Distribution Folder and Files</h4> <br>
+
+    <p class="comments">
+        // We are now going to use the Grunt usemin module together with concat, cssmin, uglify and filerev to prepare the distribution folder. To do this, install the following Grunt modules: <br>
+        <ol>
+            <li><b>npm install grunt-contrib-concat --save-dev</b></li>
+            <li><b>npm install grunt-contrib-cssmin --save-dev</b></li>
+            <li><b>npm install grunt-contrib-htmlmin --save-dev</b></li>
+            <li><b>npm install grunt-contrib-uglify --save-dev</b></li>
+            <li><b>npm install grunt-filerev --save-dev</b></li>
+            <li><b>npm install grunt-usemin --save-dev</b></li>
+        </ol> <br>
+        // Next, update the task configuration within the Gruntfile.js with the following additional code to introduce the new tasks: <br>
+        <textarea name="" id="" cols="100" rows="50" class="code">
+useminPrepare: {
+    foo: {
+        dest: 'dist',
+        src: ['contactus.html','aboutus.html','index.html']
+    },
+    options: {
+        flow: {
+            steps: {
+                css: ['cssmin'],
+                js:['uglify']
+            },
+            post: {
+                css: [{
+                    name: 'cssmin',
+                    createConfig: function (context, block) {
+                    var generated = context.options.generated;
+                        generated.options = {
+                            keepSpecialComments: 0, rebase: false
+                        };
+                    }       
+                }]
+            }
+        }
+    }
+},
+
+// Concat
+concat: {
+    options: {
+        separator: ';'
+    },
+
+    // dist configuration is provided by useminPrepare
+    dist: {}
+},
+
+// Uglify
+uglify: {
+    // dist configuration is provided by useminPrepare
+    dist: {}
+},
+
+cssmin: {
+    dist: {}
+},
+
+// Filerev
+filerev: {
+    options: {
+        encoding: 'utf8',
+        algorithm: 'md5',
+        length: 20
+    },
+
+    release: {
+    // filerev:release hashes(md5) all assets (images, js and css )
+    // in dist directory
+        files: [{
+            src: [
+                'dist/js/*.js',
+                'dist/css/*.css',
+            ]
+        }]
+    }
+},
+
+// Usemin
+// Replaces all assets with their revved version in html and css files.
+// options.assetDirs contains the directories for finding the assets
+// according to their relative paths
+usemin: {
+    html: ['dist/contactus.html','dist/aboutus.html','dist/index.html'],
+    options: {
+        assetsDirs: ['dist', 'dist/css','dist/js']
+    }
+},
+
+htmlmin: {                                         // Task
+    dist: {                                        // Target
+        options: {                                 // Target options
+            collapseWhitespace: true
+        },
+        files: {                                   // Dictionary of files
+            'dist/index.html': 'dist/index.html',  // 'destination': 'source'
+            'dist/contactus.html': 'dist/contactus.html',
+            'dist/aboutus.html': 'dist/aboutus.html',
+        }
+    }
+}
+        </textarea> <br>
+        // Next, update the jit-grunt configuration as follows, to inform it that useminPrepare task depends on the usemin package: <br>
+        <textarea name="" id="" cols="100" rows="10" class="code">
+require('jit-grunt')(grunt, {
+    useminPrepare: 'grunt-usemin'
+});
+        </textarea> <br>
+        // Next, update the Grunt build task as follows: <br>
+        <textarea name="" id="" cols="100" rows="15" class="code">
+grunt.registerTask('build', [
+    'clean',
+    'copy',
+    'imagemin',
+    'useminPrepare',
+    'concat',
+    'cssmin',
+    'uglify',
+    'filerev',
+    'usemin',
+    'htmlmin'
+]);
+        </textarea> <br>
+        // Now if you run Grunt, it will create a dist folder with the files structured correctly to be distributed to a server to host your website. To do this, type the following at the prompt: <br>
+        <p class="code">
+            grunt build
+        </p>
+    </p> <br>
+
+    <h4>Full Grunt Script</h4> <br>
+
+    <p class="code">
+        <textarea name="" id="" cols="100" rows="100" class="code">
+'use strict';
+
+module.exports = function (grunt) {
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
+
+    // Automatically load required Grunt tasks
+    require('jit-grunt')(grunt, {
+        useminPrepare: 'grunt-usemin'
+    });
+
+    const sass = require('node-sass');
+
+    // Define the configuration for all the tasks
+    grunt.initConfig({
+        sass: {
+            options: {
+                implementation: sass,
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    './6-Boostrap-Training/styles.css': './6-Boostrap-Training/styles.scss'
+                }
+            }
+        },watch: {
+            files: './6-Boostrap-Training/*.scss',
+            tasks: ['sass']
+        },
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        './6-Boostrap-Training/*.css',
+                        '*.html',
+                        './6-Boostrap-Training/*.js'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: {
+                        baseDir: "./"
+                    }
+                }
+            }
+        },copy: {
+            html: {
+                files: [
+                {
+                    //for html
+                    expand: true,
+                    dot: true,
+                    cwd: './6-Boostrap-Training',
+                    src: ['*.html', '*.css', '*.js'],
+                    dest: 'dist'
+                }]                
+            },
+            fonts: {
+                files: [
+                {
+                    //for font-awesome
+                    expand: true,
+                    dot: true,
+                    cwd: 'node_modules/font-awesome',
+                    src: ['fonts/*.*'],
+                    dest: 'dist'
+                }]
+            },
+            images: {
+                files: [
+                    {
+                        expand: true,
+                        dot: true,
+                        cwd: './6-Boostrap-Training/img',
+                        src: ['*.png'],
+                        dest: 'dist/img'
+                    }
+                ]
+            }
+        },
+        clean: {
+            build: {
+                src: [ 'dist/']
+            }
+        },
+        imagemin: {
+            dynamic: {
+                files: [{
+                    expand: true,                     // Enable dynamic expansion
+                    cwd: './6-Boostrap-Training',    // Src matches are relative to this path
+                    src: ['img/*.{png,jpg,gif}'],   // Actual patterns to match
+                    dest: 'dist/'                  // Destination path prefix
+                }]
+            }
+        },useminPrepare: {
+            foo: {
+                dest: 'dist',
+                src: ['contactus.html','aboutus.html','index.html']
+            },
+            options: {
+                flow: {
+                    steps: {
+                        css: ['cssmin'],
+                        js:['uglify']
+                    },
+                    post: {
+                        css: [{
+                            name: 'cssmin',
+                            createConfig: function (context, block) {
+                            var generated = context.options.generated;
+                                generated.options = {
+                                    keepSpecialComments: 0, rebase: false
+                                };
+                            }
+                        }]
+                    }
+                }
+            }
+        },
+        // Concat
+        concat: {
+            options: {
+                separator: ';'
+            },
+            // dist configuration is provided by useminPrepare
+            dist: {}
+        },
+
+        // Uglify
+        uglify: {
+            // dist configuration is provided by useminPrepare
+            dist: {}
+        },
+
+        cssmin: {
+            dist: {}
+        },
+        // Filerev
+        filerev: {
+            options: {
+                encoding: 'utf8',
+                algorithm: 'md5',
+                length: 20
+            },
+            release: {
+            // filerev:release hashes(md5) all assets (images, js and css )
+            // in dist directory
+                files: [{
+                    src: [
+                        'dist/js/*.js',
+                        'dist/css/*.css',
+                    ]
+                }]
+            }
+        },
+        // Usemin
+        // Replaces all assets with their revved version in html and css files.
+        // options.assetDirs contains the directories for finding the assets
+        // according to their relative paths
+        usemin: {
+            html: ['dist/contactus.html','dist/aboutus.html','dist/index.html'],
+            options: {
+                assetsDirs: ['dist', 'dist/css','dist/js']
+            }
+        },
+
+        htmlmin: {                                         // Task
+            dist: {                                        // Target
+                options: {                                 // Target options
+                    collapseWhitespace: true
+                },
+                files: {                                   // Dictionary of files
+                    'dist/index.html': 'dist/index.html',  // 'destination': 'source'
+                    'dist/contactus.html': 'dist/contactus.html',
+                    'dist/aboutus.html': 'dist/aboutus.html',
+                }
+            }
+        }
+    });
+
+    grunt.registerTask('css', ['sass']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
+    grunt.registerTask('build', [
+        'clean',
+        'copy',
+        'imagemin',
+        'useminPrepare',
+        'concat',
+        'cssmin',
+        'uglify',
+        'filerev',
+        'usemin',
+        'htmlmin'
+    ]);
+
+};
+        </textarea>
     </p>
+
 
     </div>
     <!-- END OF TASK RUNNERS -->
