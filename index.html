@@ -970,13 +970,95 @@
     </div>
 
     <div class="container">
-        <h2>GRUNT & GULP</h2>
-    </div>
+        <h2>GRUNT</h2> <br>
 
-    <h4>GRUNT</h4><br>
+        <h4>Installing Grunt</h4><br>
+
     <p class="comments">
-        
+        <ol>
+            <li>Install first globally: <b>sudo npm install -g grunt-cli</b></li>
+            <li>After that we installed locally: <b>npm install grunt --save-dev</b></li>
+        </ol>
+    </p> <br>
+
+    <h4>Creating a Grunt File</h4> <br>
+    <p class="comments">
+        Create a Grunt file containing the configuration for all the tasks to be run when you use Grunt. To do this, create a file named <b>Gruntfile.js</b> <br>
+        <textarea name="" id="" cols="100" rows="12">
+'use strict';
+
+module.exports = function (grunt) {
+  // Define the configuration for all the tasks
+  grunt.initConfig({
+
+  });
+};
+        </textarea>
+    </p> <br>
+
+    <h4>Compiling SCSS to CSS</h4> <br>
+    <p class="comments">
+        // Install the followings: <br>
+        <ol>
+            <li><b>npm install grunt-sass --save-dev</b></li>
+            <li><b>npm install time-grunt --save-dev</b></li>
+            <li><b>npm install jit-grunt --save-dev</b></li>
+        </ol> <br>
     </p>
+
+    <p class="comments">
+        // Now, configure the SASS task in the Gruntfile as follows, by including the code inside the function in Gruntfile.js: <br>
+        // BE SURE TO HAVE <b>node-sass</b> module already installed
+    </p>
+
+    <textarea name="" id="" cols="100" rows="30" class="code">
+'use strict';
+
+module.exports = function (grunt) {
+    // Time how long tasks take. Can help when optimizing build times
+    require('time-grunt')(grunt);
+
+    // Automatically load required Grunt tasks
+    require('jit-grunt')(grunt);
+
+    const sass = require('node-sass');
+
+    // Define the configuration for all the tasks
+    grunt.initConfig({
+        sass: {
+            options: {
+                implementation: sass,
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    '6-Boostrap-Training/styles.css': '6-Boostrap-Training/styles.scss'
+                }
+            }
+        }
+    });
+
+    grunt.registerTask('css', ['sass']);
+
+};
+    </textarea> <br>
+
+    <p class="comments">
+        // run the task <br>
+        <b>grunt css</b>
+    </p> <br>
+
+    <h4>Watch and Serve Tasks</h4> <br>
+
+    <p class="comments">
+        The final step is to use the Grunt modules watch and browser-sync to spin up a web server and keep a watch on the files and automatically reload the browser when any of the watched files are updated. To do this, install the following grunt modules: <br>
+        <ol>
+            <li>npm install grunt-contrib-watch --save-dev</li>
+            <li>npm install grunt-browser-sync --save-dev</li>
+        </ol>
+    </p> <br>
+
+    </div>
     <!-- END OF TASK RUNNERS -->
 
     <!-- REACT -->
