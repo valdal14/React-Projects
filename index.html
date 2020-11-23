@@ -1583,11 +1583,62 @@ module.exports = function (grunt) {
             <h5>Configure your React Project to use Reactstrap</h5> <br>
             // First install the followings: <br>
             <ol>
-                <li><b>npm i bootstrap</b></li>
-                <li><b>npm i reactstrap</b></li>
-                <li><b></b></li>
-            </ol>
+                <li><b>yarn add bootstrap</b></li>
+                <li><b>yarn add reactstrap</b></li>
+                <li><b>yarn add react-popper</b></li>
+            </ol> <br>
         </p>
+
+        <h4>Configure to use Bootstrap</h4> <br>
+        <p class="comments">
+            Next, open <b>index.js</b> file in the <b>src</b> folder and add the following line into the imports: <br>
+            <p class="code">
+                import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+            </p>
+        </p> <br>
+
+        <h4>Adding a Navigation Bar</h4> <br>
+        <p class="comments">
+            Open App.js in the src folder and update it as follows <br>
+            <textarea name="" id="" cols="100" rows="34" class="code">
+import logo from './logo.svg';
+import './App.css';
+
+// Importing react-bootstrap
+import { Navbar, NavbarBrand } from 'react-bootstrap';
+
+function App() {
+    return (
+    <div className="App">
+        
+        {/* react-bootstrap NavBar */}
+        <Navbar dark color="primary">
+            <div className="container">
+            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+            </div>
+        </Navbar>
+
+        <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+            Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Learn React
+        </a>
+        </header>
+    </div>
+    );
+}
+
+            </textarea>
+        </p>
+        
         
         <ol>
             <li><a href="./2-RenderingUI-React/1-Introduction.html">Redenring UI</a></li>
