@@ -1590,6 +1590,7 @@ module.exports = function (grunt) {
         </p>
 
         <h4>Configure to use Bootstrap</h4> <br>
+        <a href="https://react-bootstrap.netlify.app/getting-started/introduction">react-bootstrap docs</a> <br> <br>
         <p class="comments">
             Next, open <b>index.js</b> file in the <b>src</b> folder and add the following line into the imports: <br>
             <p class="code">
@@ -1635,10 +1636,145 @@ function App() {
     </div>
     );
 }
+            </textarea>
+        </p> <br>
+        
+        <h4>React Components</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>A React component returns a set of React elements that should appear on screen.</li>
+                <li>React Components should always start with a Capital letter</li>
+            </ol>
+        </p> <br>
+
+        <h5>Create a basic structure for a React component</h5> <br>
+        <p class="comments">
+            <textarea name="" id="" cols="100" rows="17" class="code">
+import React, { Component } from 'react';
+
+class Menu extends Component {
+    // define the constructor
+    constructor(props) {
+        super(props);
+    }
+
+    render(){
+        return ({
+
+        });
+    }
+}
+
+export default Menu;
+            </textarea>
+        </p> <br> <br>
+
+        <h5>Final version of the Menu Component</h5> <br>
+        <p class="comments">
+            <textarea name="" id="" cols="100" rows="50" class="code">
+import React, { Component } from 'react';
+// react-strap 
+import { Media } from 'react-bootstrap';
+
+class Menu extends Component {
+    // define the constructor
+    constructor(props) {
+        super(props);
+        // define a state for this component
+        this.state = {
+            dishes: [
+                {
+                    id: 0,
+                    name:'Uthappizza',
+                    image: 'assets/images/uthappizza.png',
+                    category: 'mains',
+                    label:'Hot',
+                    price:'4.99',
+                    description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+                },
+                {
+                    id: 1,
+                    name:'Zucchipakoda',
+                    image: 'assets/images/zucchipakoda.png',
+                    category: 'appetizer',
+                    label:'',
+                    price:'1.99',
+                    description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
+                },
+                {
+                    id: 2,
+                    name:'Vadonut',
+                    image: 'assets/images/vadonut.png',
+                    category: 'appetizer',
+                    label:'New',
+                    price:'1.99',
+                    description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
+                },
+                {
+                    id: 3,
+                    name:'ElaiCheese Cake',
+                    image: 'assets/images/elaicheesecake.png',
+                    category: 'dessert',
+                    label:'',
+                    price:'2.99',
+                    description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
+                }
+                ]
+        };
+    }
+
+    render(){
+
+        // make use of the dishes array from the state object using map
+        const menu = this.state.dishes.map((dish)=> {
+            // for every dish we return the following HTML
+            return (
+                <div key={dish.id} className="col-12 mt-5">
+                    <Media as="li">
+                        <Media left="true" middle="true">
+                            {/* <Media object src={dish.image} alt={dish.name} /> */}
+                            <img src={dish.image} alt={dish.name} />
+                        </Media>
+                        <Media.Body className="ml-5">
+                            <h3>{dish.name}</h3>
+                            <p>{dish.description}</p>
+                        </Media.Body>
+                    </Media>
+                </div>
+            );
+        });
+
+        return (
+            <div className="container">
+                <div className="row">
+                    <Media  list="true">
+                        <ul className="list-unstyled">
+                            {/* JSX Variable declaration */}
+                            {menu}
+                        </ul>
+                    </Media>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default Menu;
+                
 
             </textarea>
+        </p> <br>
+
+        <h5>Display the Menu Component in our app</h5> <br>
+        <p class="comments">
+            // Inside our <b>App.js</b> component we import the <b>Menu</b> component: <br>
+            <p class="code">
+                import Menu from './components/MenuComponent';
+            </p> <br>
+            // An we use it inside the return statement below the NavBar we created before
+
+
         </p>
-        
         
         <ol>
             <li><a href="./2-RenderingUI-React/1-Introduction.html">Redenring UI</a></li>
