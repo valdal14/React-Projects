@@ -1771,10 +1771,123 @@ export default Menu;
             <p class="code">
                 import Menu from './components/MenuComponent';
             </p> <br>
-            // An we use it inside the return statement below the NavBar we created before
+            // An we use it inside the return statement below the NavBar we created before <br>
+            <textarea name="" id="" cols="100" rows="20" class="code">
+import './App.css';
+import Menu from './components/MenuComponent';
 
+// Importing react-bootstrap
+import { Navbar, NavbarBrand } from 'react-bootstrap';
 
-        </p>
+function App() {
+  return (
+    <div className="App">
+      
+      {/* react-bootstrap NavBar */}
+      <Navbar bg="primary" expand="lg">
+          <div className="container">
+            <NavbarBrand href="/" className="logoName">Ristorante Con Fusion</NavbarBrand>
+          </div>
+      </Navbar>
+      {/* Menu Component */}
+      <Menu />
+    </div>
+  );
+}
+
+export default App;
+            </textarea>
+        </p> <br>
+
+        <h4>State and Props</h4> <br>
+        <p class="comments">
+            We already seen how we can pass the info to a component using <b>states</b>. Another way is with <b>props</b> <br>
+            <ul>
+                <li><h5>STATE</h5></li>
+                <ul>
+                    <li>Each component can store its local information in its <b>state</b></li>
+                    <li>The <b>state</b> is private and fully controlled by the Component</li>
+                    <li>The <b>state</b> can be easily passed to the Component children as <b>props</b></li>
+                    <li>In React only class component can have a state</li>
+                    <li>The <b>state</b> information is usually delcared inside the constructor</li>
+                    <ul>
+                        <li>
+                            <textarea name="" id="" cols="60" rows="12" class="code">
+import React, { Component } from 'react';
+
+class Menu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedDish: null;
+        };
+    }
+}
+                            </textarea>
+                        </li>
+                    </ul>
+                    <li>The <b>state</b> can be only modified using the method <b>setState()</b></li>
+                    <ul>
+                        <li>
+                            <textarea name="" id="" cols="60" rows="6" class="code">
+onDishSelected(dish) {
+    this.setState({
+        selectedDish: dish;
+    })
+}
+                            </textarea>
+                        </li>
+                    </ul>
+                </ul>
+            </ul> <br><br>
+
+            <ul>
+                <li><h5>PROPS</h5></li>
+                <ul>
+                    <li>JSX Attributes are passed into a component as a single object</li>
+                    <ul>
+                        <li>Available in the component as <b>props</b></li>
+                        <li>Can pass in multiple Attributes</li>
+                        <li>Cannot modify <b>props</b> within the component</li>
+                        <ul>
+                            <li>
+                                Here the dishes are available as <b>props</b> within the Menu Component and can be accessed as this.props.dishes
+                                <textarea name="" id="" cols="60" rows="2" class="code">
+<Menu dishes={this.state.dishes} />
+                                </textarea>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                Here dish is available as <b>props</b> within the Dishdetail Component and can be accessed as this.props.dish, and comments as this.props.comments <br>
+                                <textarea name="" id="" cols="60" rows="3" class="code">
+<Dishdetail dish={this.state.dish} comments={this.state.comments} />
+                                </textarea>
+                            </li>
+                        </ul>
+                    </ul>
+                    
+                </ul>
+            </ul> <br> <br>
+
+            <ul>
+                <li><h5>HANDLING EVENTS</h5></li>
+                <ul>
+                    <li>Use <b>camelCase</b> to specify events</li>
+                    <li>Pass function as the event handler</li>
+                </ul>
+                <ul>
+                    <li>
+                       Example: <br>
+                        <textarea name="" id="" cols="60" rows="2" class="code">
+<Card onclick={()=> this.onDishSelected(dish)} />
+                        </textarea>
+                    </li>
+                </ul>
+            </ul>
+            
+            
+        </p> <br>
         
         <ol>
             <li><a href="./2-RenderingUI-React/1-Introduction.html">Redenring UI</a></li>

@@ -1,19 +1,12 @@
 import './App.css';
 import Menu from './components/MenuComponent';
-
-// Importing react-bootstrap
-import { Navbar, NavbarBrand } from 'react-bootstrap';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
     <div className="App">
-      
-      {/* react-bootstrap NavBar */}
-      <Navbar bg="primary" expand="lg">
-          <div className="container">
-            <NavbarBrand href="/" className="logoName">Ristorante Con Fusion</NavbarBrand>
-          </div>
-      </Navbar>
+      {/* NavBar Component */}
+      <NavBar />
       {/* Menu Component */}
       <Menu />
     </div>
