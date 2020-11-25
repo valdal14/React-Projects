@@ -19,14 +19,117 @@
     <div class="container">
         <h2>Agenda</h2> <br>
         <ol>
+            <li><a href="#javascriptRefresh">Next Gen JavaScript</a></li>
             <li><a href="#gitSection">GIT</a></li>
             <li><a href="#bootstrapSection">Bootstrap</a></li>
             <li><a href="#cssSection">CSS Preprocessors</a></li>
             <li><a href="#buldingProjects">Building & Deployment</a></li>
             <li><a href="#taskRunner">Task Runners</a></li>
-            <li><a href="#reactSection">React JS</a></li>
+            <li><a href="#reactSection">React JS & React-Bootstrap</a></li>
+            <li><a href="#reactAndRedux">React JS</a></li>
         </ol>
     </div>
+
+    <!-- NEXT GEN JS -->
+    <div class="jumbotron" id="javascriptRefresh">
+        <h1>Next Gen JavaScript</h1>
+    </div>
+
+    <div class="container">
+        <h4>Arrow functions</h4> <br>
+
+        <p class="comments">
+            Example of traditional function <br>
+            <textarea name="" id="" cols="100" rows="5" class="code">
+function myFunc() {
+    ...
+}
+            </textarea> <br>
+            Example of Arrow function <br>
+            <b>Note: </b> when you use the keyword <b>this</b> inside an arrow function it does not change the context at runtime <br>
+            <textarea name="" id="" cols="100" rows="5" class="code">
+const myFunc = ()=>  {
+    ...
+}
+            </textarea> <br>
+        </p>
+
+        <h4>Exports & Imports (Modules)</h4> <br>
+        <p class="comments">
+            In JS we can import a <b>default</b> or <b>named</b> import <br>
+            <img src="images/modules.png" alt="modules"> <br><br>
+            <img src="images/modules-2.png" alt="modules" srcset="">
+        </p> <br>
+
+        <h4>Prototyping</h4> <br>
+        <p class="comments">
+            <textarea name="" id="" cols="100" rows="30">
+                function Person(name, age) {
+                    var info = {
+                        firstName: name,
+                        age: age
+                    }
+                }
+
+                Person.prototype.printInfo = function(){
+                    console.log(this.info.firstName)
+                }
+            </textarea>
+        </p>
+
+        <h4>Classes ES6</h4> <br>
+        <p class="comments">
+            Class creation, inheritance, instanciation, constructors, methods and properties: <br>
+            <textarea name="" id="" cols="100" rows="30" class="code">
+
+// class declaration
+
+class Human {
+    constructor(kind, race, color){
+        this.kind = kind;
+        this.race = race;
+        this.color = color
+    }
+}
+
+class Person extends Human {
+    constructor(kind, race, color, name, age,) {
+        // calling the constructor from the super class
+        super(kind, race, color);
+        this.name = name;
+        this.age = age;
+    }
+
+    // static method
+    static printClassInfo() {
+        console.log('This is a static method of the Person class');
+    }
+
+    personInfo(){
+        console.log(`${this.name} is ${this.age} old is ${this.race} and its skin color is ${this.color}`);
+    }
+}
+
+// Accessing static class method
+Person.printClassInfo();
+
+// class instanciation
+
+let h = new Human('Human', 'Caucasian', 'White');
+
+let p1 = new Person(h.kind, h.race, h.color, 'Valerio', 42);
+p1.personInfo();
+
+
+            </textarea>
+        </p> <br>
+
+
+
+
+    </div> <br>
+    <!-- END OF NEXT GEN JS -->
+
 
     <!-- GIT -->
     <div class="jumbotron" id="gitSection">
@@ -1537,7 +1640,7 @@ module.exports = function (grunt) {
     </div>
     <!-- END OF TASK RUNNERS -->
 
-    <!-- REACT -->
+    <!-- REACT & REACT BOOTSTRAP -->
     <div class="jumbotron" id="reactSection">
         <h1>ReactJS Training</h1>
     </div> <br>
@@ -1888,15 +1991,69 @@ onDishSelected(dish) {
             
             
         </p> <br>
-        
-        <ol>
-            <li><a href="./2-RenderingUI-React/1-Introduction.html">Redenring UI</a></li>
-            <li><a href="./3-Create-React-App/CreateReactApp.html">Create React APP</a></li>
-            <li><a href="./4-Composition/index.html">Composition with Components</a></li>
-            <li><a href="./5-StateManagement/index.html">State Management</a></li>
-        </ol>
     </div>
-    <!-- END OF REACT -->
+    <!-- END OF REACT & REACT-BOOTSTRAP -->
+
+     <!-- REACT JS AND REDUX -->
+     <div class="jumbotron" id="reactAndRedux">
+        <h1>REACT JS AND REDUX</h1>
+    </div>
+
+    <div class="container">
+        <h2>First Small React Project</h2> <br>
+        <p class="comments">
+            <b>props</b> contains all the attributes I added to my own component <br>
+            <textarea name="" id="" cols="100" rows="15">
+export default function App(props) {
+    return (
+        <div className="person">
+        <h1 className="name">{props.name}</h1>
+        <p className="age">Your age: {props.age}</p>
+        </div>
+    );
+}
+
+ReactDOM.render(
+  <React.StrictMode>
+    {/* props allows us to retrieve the attributes associated to the App component */}
+    <App name='Valdal14' age='42' />
+    <App name='Lefemas' age='45' />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+            </textarea> <br> <br>
+
+            <p class="comments">
+                We could also create a variable that hosts JSX code and the components and render them using react dom <br>
+                <textarea name="" id="" cols="100" rows="15">
+export default function Person(props) {
+    return (
+        <div className="person">
+        <h1 className="name">{props.name}</h1>
+        <p className="age">Your age: {props.age}</p>
+        </div>
+    );
+}
+                    
+let app = (
+    // components must be wrapped inside a div since JSX only allows one root element
+    <div>
+      <Person name='Valdal14' age='42' />
+      <Person name='Lefemas' age='45' />
+    </div>
+  );
+  
+ReactDOM.render(
+    app,
+    document.getElementById('root')
+);
+                                </textarea> <br> <br>
+            </p>
+        </p> <br>
+
+    </div>
+    <!-- END OF REACT JS AND REDUX -->
+
 
 </body>
 <!-- SCRIPTS SECTION -->
