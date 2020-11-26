@@ -63,17 +63,19 @@ const myFunc = ()=>  {
 
         <h4>Prototyping</h4> <br>
         <p class="comments">
-            <textarea name="" id="" cols="100" rows="30">
-                function Person(name, age) {
-                    var info = {
-                        firstName: name,
-                        age: age
-                    }
-                }
+            <textarea name="" id="" cols="100" rows="12">
+class Person {
+    constructor(firstName, age) {
+        this.firstName = firstName;
+        this.age = age;
+    }
+}
 
-                Person.prototype.printInfo = function(){
-                    console.log(this.info.firstName)
-                }
+// Javascript prototyping with classes
+Person.prototype.printInfo = function(){
+    console.log(this.firstName)
+    console.log(this.age)
+}
             </textarea>
         </p>
 
@@ -124,8 +126,83 @@ p1.personInfo();
             </textarea>
         </p> <br>
 
+        <h4>Classes in ES7</h4> <br>
+        <p class="comments">
+            With ES7 we can use arrow functions inside classes. This gives us the advantage of not compromising the value of the keyword <b>this</b> at runtime and we can omit the constructor function if not needed <br>
+            <textarea name="" id="" cols="100" rows="10" class="code">
+class Person {
+    firtName = 'Valerio';
+    age = 42
+
+    printInfo = () => {
+        console.log(this);
+        // VM44:6 Person {firtName: "Valerio", age: 42, printInfo: ƒ}
+        console.log(this.firstName);
+        console.log(this.age);
+    }
+}
+            </textarea>
+        </p> <br>
+
+        <h4>Spread & Rest Operators</h4> <br>
+        <p class="comments">
+            <img src="images/spreqdOperator.png" alt="Spread-Rest" srcset="">
+        </p>
+
+        <h4>Destructuring</h4> <br>
+        <p class="comments">
+            <img src="images/destructuring.png" alt="destrucring" srcset="">
+        </p> <br>
+
+        <h4>Reference and Primitive Types Refresher</h4>
+        <p class="comments">
+            <ol>
+                <li>In Javascript Boolean, Null, Undefined and Numbers and Strings are Primitive types</li>
+                <li>Objects and Arrays are reference types</li>
+            </ol>
+             <br>
+            Example: <br>
+            <textarea name="" id="" cols="100" rows="18" class="code">
+// Primitivies 
+const num = 12;
+const newNum = num;
+
+// In this case the value is copied from num to newNum. With reference types when we reassign or copy we store a reference in memory to that object (Pointer)
+
+const person = {
+    name: 'Valerio'
+}
+
+const newPerson = person;
+
+console.log(newPerson.name) // will print Valerio
+
+// reassign the person.name value
+
+person.name = 'Lefemas';
+
+console.log(newPerson.name); // will print Lefemas since the newPerson points at the address in memory of person
+            </textarea>
+        </p> <br>
+
+        <p class="comments">
+            We can copy tho arrays and object in an immutable way using the <b>slice()</b> method or the <b>rest</b> operator we already covered above: <br>
+            <textarea name="" id="" cols="100" rows="10" class="code">
+const sheeps = ['🐑', '🐑', '🐑'];
+
+// Old way
+const cloneSheeps = sheeps.slice();
+
+// ES6 way
+const cloneSheepsES6 = [...sheeps]
+            </textarea>
+        </p>
 
 
+        <h4>Array functions</h4> <br>
+        <p class="comments">
+            <ul><li><code>map()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map</a></li><li><code>find()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find</a></li><li><code>findIndex()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex</a></li><li><code>filter()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter</a></li><li><code>reduce()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce?v=b">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce?v=b</a></li><li><code>concat()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat?v=b">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat?v=b</a></li><li><code>slice()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice</a></li><li><code>splice()</code>&nbsp;&nbsp;=&gt;&nbsp;<a target="_blank" rel="nofollow" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice</a></li></ul>
+        </p>
 
     </div> <br>
     <!-- END OF NEXT GEN JS -->
