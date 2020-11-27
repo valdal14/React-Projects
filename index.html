@@ -1782,7 +1782,46 @@ export default function myElement() {
 };     
                 </textarea>
             </p>
-        </p>
+        </p> <br>
+
+        <h4>Nesting React Elements</h4> <br>
+        <p class="comments">
+            Soon we will see how we can nest React Components, but inside the function <b>React.createElement</b> we can also nest additional element by passing another <b>React.createElement</b> call. At the end when we use JSX syntax the what we do is simply calling <b>React.createElement</b> <br>
+            <b>Example</b>: <br>
+            <b>Note:</b> How the second argument in the <b>React.createElement</b> can be a JS object in our example a JSX <b>className: 'App'</b> style <br><br>
+            <textarea name="" id="" cols="100" rows="15" class="code">
+const person = {
+fullName: 'Valerio DAlessio'
+}
+
+const NestingElements = ()=> {
+return(  
+React.createElement(
+    'div',
+    {className:"App"},
+    React.createElement(
+    'h1',
+    null,
+    `Welcome ${person.fullName}`
+    ) 
+))
+}
+
+ReactDOM.render(
+<React.StrictMode>
+    <ReactElement />
+    <App />
+    <NestingElements />
+</React.StrictMode>,
+document.getElementById('root')
+);
+            </textarea> 
+        </p> <br><br>
+
+        <p class="comments">
+            The above code will be converted by the build tool and this is why we always import <b>React</b> <br>
+            Of course create each element using <b>React.createElement</b> is very complex and confusing and this is why we prefer <b>JSX</b> syntax
+        </p> <br><br>
 
 
         <h2>First Small React Project</h2> <br>
@@ -2020,6 +2059,46 @@ export default App;
                     <li>Allow us to hook up the forms in our applications to our component states</li>
                 </ul>
             </ul>
+        </p> <br>
+
+        <h4>Creating Functional Components</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>Create a folder person inside the <b>src</b> folder</li>
+                <li>Create a <b>Person.js</b> inside the same folder</li>
+                <li>We will create just a function. At the end a <b>React Component</b> is just a function that return some <b>JSX</b></li>
+                <br>
+                <textarea name="" id="" cols="100" rows="25" class="code">
+// Person.js
+
+import React from 'react';
+
+// React must be imported since the following will be converted in React.createElement and JSX
+// We do not need to import Component tho since we are not using a class
+const person = () => {
+    return <h2>I'am a <b>Functional Component</b></h2>
+};
+
+export default person;
+
+// App.js
+
+import React from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+function App() {
+  return (
+    <div className="App">
+     <Person />
+    </div>
+  );
+}
+
+export default App;
+
+                </textarea>
+            </ol>
         </p> <br>
 
         <h4>React PROPS</h4> <br>
