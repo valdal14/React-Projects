@@ -1858,9 +1858,176 @@ ReactDOM.render(
         <p class="comments">
             Convert the previous <b>React Element</b> we created into a <b>React Component</b>: <br>
             <textarea name="" id="" cols="100" rows="25" class="code">
-                
+import React, { Component } from 'react';
+import './react-element.css';
+
+class ConvertedElementToComponent extends Component {
+
+    render() {
+
+        const people = [
+            {
+                id: 0,
+                name: 'Valerio',
+                role: 'Programmer'
+            },
+            {
+                id: 1,
+                name: 'Lefemas',
+                role: 'Marketing Manager'
+            }
+        ];
+        
+        // Create a JSX/HTML like element
+        return (
+            <div className='mainDiv'>
+                <h1>This is an H1 tag create with <b>React.createElement</b> and rendered with <b>ReactDOM.render</b></h1> <br/>
+                <p>
+                    <ul>
+                        { people.map(person => (
+                            <li key={person.id}><b>Name:</b> {person.name} = <b>Role:</b> {person.role}</li>
+                        ))}
+                    </ul>
+                </p>
+                <hr/>
+            </div>
+        );
+        
+    }
+};
+
+export default ConvertedElementToComponent;
             </textarea>
+        </p> <br>
+
+        <h4>Favor Composition Over Inheritance</h4> <br>
+        <p class="comments">
+            React uses composition to build user interfaces. Yes, we extend React.Component, but we never extend it more than once. Instead of extending base components to add more UI or behavior, we compose elements in different ways using nesting and props. You ultimately want your UI components to be independent, focused, and reusable. <br>
         </p>
+
+        <h4>Nesting Components</h4> <br>
+        <p class="comments">
+            In this short example, I am going to import the above component inside the <b>App</b> Component that will be then imported in the <b>index.js</b> file that will render it. <br>
+            <textarea name="" id="" cols="100" rows="15" class="code">
+import './App.css';
+// Here I am importing the above ConvertedElementToComponent class component 
+import ContactList from './convert-element-to-component';
+
+function App() {
+  return (
+    <div className="App">
+      {/* here I am returning it inside the App function */}
+      <ContactList />
+    </div>
+  );
+}
+
+export default App;
+            </textarea>
+        </p> <br>
+
+        <p class="comments">
+            We can reuse the <b>ContactList</b> components several time inside the function <b>App</b> and differenciate them using <b>props</b> <br>
+            We can create a <b class="code">const people = this.props.contacts</b> and pass individual values inside each component <br><br>
+            <textarea name="" id="" cols="100" rows="50" class="code">
+// Component
+
+import React, { Component } from 'react';
+import './react-element.css';
+
+class ConvertedElementToComponent extends Component {
+
+    render() {
+
+        const people = this.props.contacts;
+        
+        // Create a JSX/HTML like element
+        return (
+            <div className='mainDiv'>
+                <h1>This is an H1 tag create with <b>React.createElement</b> and rendered with <b>ReactDOM.render</b></h1> <br/>
+                <ul>
+                    { people.map(person => (
+                        <li key={person.id}><b>Name:</b> {person.name} = <b>Role:</b> {person.role}</li>
+                    ))}
+                </ul>
+                <hr/>
+            </div>
+        );
+        
+    }
+};
+
+export default ConvertedElementToComponent;
+
+
+// Functional Component APP
+
+import './App.css';
+import ContactList from './convert-element-to-component';
+
+function App() {
+  return (
+    <div className="App">
+      <ContactList contacts={[
+            {
+                id: 0,
+                name: 'Valerio',
+                role: 'Programmer'
+            },
+            {
+                id: 1,
+                name: 'Lefemas',
+                role: 'Marketing Manager'
+            }
+        ]} />
+
+      <ContactList contacts={[
+            {
+                id: 2,
+                name: 'Stallman',
+                role: 'Gnu-Linux Guru'
+            },
+            {
+                id: 3,
+                name: 'Jobs',
+                role: 'Marketing Manager'
+            }
+        ]} />
+    </div>
+  );
+}
+
+export default App;
+
+            </textarea>
+        </p> <br>
+
+        <h2>State Management</h2> <br>
+
+        <p class="comments">
+            In this section we are going to have a look at:
+            <ul>
+                <li><b>Props</b></li>
+                <ul>
+                    <li>Allows us to pass data into Components</li>
+                </ul>
+                <li><b>Functional Components</b></li>
+                <ul>
+                    <li>An alternative and most probably a more intuitive approach to creating Components</li>
+                </ul>
+                <li><b>Controller Components</b></li>
+                <ul>
+                    <li>Allow us to hook up the forms in our applications to our component states</li>
+                </ul>
+            </ul>
+        </p> <br>
+
+        <h4>React PROPS</h4> <br>
+
+        <p class="comments">
+            <b>Props</b> allows you to pass data into Components. Each component will automatically have access to <b>props</b> once created
+        </p>
+
 
     </div>
     <!-- END OF REACT JS -->
