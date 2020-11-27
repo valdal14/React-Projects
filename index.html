@@ -25,8 +25,8 @@
             <li><a href="#cssSection">CSS Preprocessors</a></li>
             <li><a href="#buldingProjects">Building & Deployment</a></li>
             <li><a href="#taskRunner">Task Runners</a></li>
+            <li><a href="#reactjs">React JS</a></li>
             <li><a href="#reactSection">React JS & React-Bootstrap</a></li>
-            <li><a href="#reactAndRedux">React JS</a></li>
         </ol>
     </div>
 
@@ -1717,366 +1717,74 @@ module.exports = function (grunt) {
     </div>
     <!-- END OF TASK RUNNERS -->
 
-    <!-- REACT & REACT BOOTSTRAP -->
-    <div class="jumbotron" id="reactSection">
-        <h1>ReactJS Training</h1>
-    </div> <br>
+     <!-- REACT JS  -->
+     <div class="jumbotron" id="reactjs">
+        <h1>REACT JS</h1>
+    </div>
 
     <div class="container">
-        <h4>Getting Started</h4> <br>
 
+        <h2>Project</h2> <br>
         <p class="comments">
-            // let's first install <b>YARN</b> <br>
-            <p class="code">
-                sudo npm install -g yarn
-            </p> <br>
-            <p class="code">
-                sudo yarn global add create-react-app
-            </p>
-        </p> <br>
-        
-        <p class="comments">
-            <h5>Create React App</h5> <br>
-            <p class="code">
-                create-react-app confusion
-            </p> <br>
-            <p class="code">
-                yarn start
-            </p> <br>
-            <p class="comments">
-                For this training we are creating an app called "confusion" and the link to this project can be found here: <br>
-                <ol>
-                    <li><a href="http://localhost:3001/" target="_blank">confusion react app</a></li>
-                </ol>
-            </p>
-        </p> <br>
-
-        <h5>JSX Flow</h5> <br>
-        <p class="comments">
-            <img src="./images/jsx.png" alt="jsx" srcset=""> <br>
-            <img src="./images/embedd-jsx.png" alt="jsx" srcset=""> <br>
-        </p>
-
-        <h4>Configuring your React Application</h4> <br>
-
-        <p class="comments">
-            <h5>Configure your React Project to use Reactstrap</h5> <br>
-            // First install the followings: <br>
-            <ol>
-                <li><b>yarn add bootstrap</b></li>
-                <li><b>yarn add reactstrap</b></li>
-                <li><b>yarn add react-popper</b></li>
-            </ol> <br>
-        </p>
-
-        <h4>Configure to use Bootstrap</h4> <br>
-        <a href="https://react-bootstrap.netlify.app/getting-started/introduction">react-bootstrap docs</a> <br> <br>
-        <p class="comments">
-            Next, open <b>index.js</b> file in the <b>src</b> folder and add the following line into the imports: <br>
-            <p class="code">
-                import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-            </p>
-        </p> <br>
-
-        <h4>Adding a Navigation Bar</h4> <br>
-        <p class="comments">
-            Open App.js in the src folder and update it as follows <br>
-            <textarea name="" id="" cols="100" rows="34" class="code">
-import logo from './logo.svg';
-import './App.css';
-
-// Importing react-bootstrap
-import { Navbar, NavbarBrand } from 'react-bootstrap';
-
-function App() {
-    return (
-    <div className="App">
-        
-        {/* react-bootstrap NavBar */}
-        <Navbar dark color="primary">
-            <div className="container">
-            <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
-            </div>
-        </Navbar>
-
-        <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-            Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            Learn React
-        </a>
-        </header>
-    </div>
-    );
-}
-            </textarea>
-        </p> <br>
-        
-        <h4>React Components</h4> <br>
-        <p class="comments">
-            <ol>
-                <li>A React component returns a set of React elements that should appear on screen.</li>
-                <li>React Components should always start with a Capital letter</li>
-            </ol>
-        </p> <br>
-
-        <h5>Create a basic structure for a React component</h5> <br>
-        <p class="comments">
-            <textarea name="" id="" cols="100" rows="17" class="code">
-import React, { Component } from 'react';
-
-class Menu extends Component {
-    // define the constructor
-    constructor(props) {
-        super(props);
-    }
-
-    render(){
-        return ({
-
-        });
-    }
-}
-
-export default Menu;
-            </textarea>
+            The entire project with code snipped is available at <a href="http://localhost:3000" target="_blank">here</a>
         </p> <br> <br>
 
-        <h5>Final version of the Menu Component</h5> <br>
+        <h2>React Elements</h2> <br>
+
         <p class="comments">
-            <textarea name="" id="" cols="100" rows="50" class="code">
-import React, { Component } from 'react';
-// react-strap 
-import { Media } from 'react-bootstrap';
+            <b>Note:</b> Like React component, When writing JSX, keep in mind that it must only return a single element. This element may have any number of descendants, but there must be a single root element wrapping your overall JSX <br>
+        </p>
 
-class Menu extends Component {
-    // define the constructor
-    constructor(props) {
-        super(props);
-        // define a state for this component
-        this.state = {
-            dishes: [
-                {
-                    id: 0,
-                    name:'Uthappizza',
-                    image: 'assets/images/uthappizza.png',
-                    category: 'mains',
-                    label:'Hot',
-                    price:'4.99',
-                    description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
-                },
-                {
-                    id: 1,
-                    name:'Zucchipakoda',
-                    image: 'assets/images/zucchipakoda.png',
-                    category: 'appetizer',
-                    label:'',
-                    price:'1.99',
-                    description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
-                },
-                {
-                    id: 2,
-                    name:'Vadonut',
-                    image: 'assets/images/vadonut.png',
-                    category: 'appetizer',
-                    label:'New',
-                    price:'1.99',
-                    description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
-                },
-                {
-                    id: 3,
-                    name:'ElaiCheese Cake',
-                    image: 'assets/images/elaicheesecake.png',
-                    category: 'dessert',
-                    label:'',
-                    price:'2.99',
-                    description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
-                }
-                ]
-        };
-    }
-
-    render(){
-
-        // make use of the dishes array from the state object using map
-        const menu = this.state.dishes.map((dish)=> {
-            // for every dish we return the following HTML
-            return (
-                <div key={dish.id} className="col-12 mt-5">
-                    <Media as="li">
-                        <Media left="true" middle="true">
-                            {/* <Media object src={dish.image} alt={dish.name} /> */}
-                            <img src={dish.image} alt={dish.name} />
-                        </Media>
-                        <Media.Body className="ml-5">
-                            <h3>{dish.name}</h3>
-                            <p>{dish.description}</p>
-                        </Media.Body>
-                    </Media>
-                </div>
-            );
-        });
-
-        return (
-            <div className="container">
-                <div className="row">
-                    <Media  list="true">
-                        <ul className="list-unstyled">
-                            {/* JSX Variable declaration */}
-                            {menu}
-                        </ul>
-                    </Media>
-                </div>
-            </div>
-        );
-    }
-}
-
-export default Menu;
-                
-
-            </textarea>
-        </p> <br>
-
-        <h5>Display the Menu Component in our app</h5> <br>
         <p class="comments">
-            // Inside our <b>App.js</b> component we import the <b>Menu</b> component: <br>
+            React uses JavaScript objects to create React elements. We'll use these React elements to describe what we want the page to look like, and React will be in charge of generating the DOM nodes to achieve the result. <br>
             <p class="code">
-                import Menu from './components/MenuComponent';
-            </p> <br>
-            // An we use it inside the return statement below the NavBar we created before <br>
-            <textarea name="" id="" cols="100" rows="20" class="code">
-import './App.css';
-import Menu from './components/MenuComponent';
+                <p class="comments">
+                    // create a react element <br>
+                    React.createElement( /* type */, /* props */, /* content */ ); 
+                </p>
+                <br>
+                <textarea name="" id="" cols="100" rows="25" class="code">
+import React from 'react';
+import './react-element.css';
 
-// Importing react-bootstrap
-import { Navbar, NavbarBrand } from 'react-bootstrap';
-
-function App() {
-  return (
-    <div className="App">
-      
-      {/* react-bootstrap NavBar */}
-      <Navbar bg="primary" expand="lg">
-          <div className="container">
-            <NavbarBrand href="/" className="logoName">Ristorante Con Fusion</NavbarBrand>
-          </div>
-      </Navbar>
-      {/* Menu Component */}
-      <Menu />
-    </div>
-  );
-}
-
-export default App;
-            </textarea>
-        </p> <br>
-
-        <h4>State and Props</h4> <br>
-        <p class="comments">
-            We already seen how we can pass the info to a component using <b>states</b>. Another way is with <b>props</b> <br>
-            <ul>
-                <li><h5>STATE</h5></li>
-                <ul>
-                    <li>Each component can store its local information in its <b>state</b></li>
-                    <li>The <b>state</b> is private and fully controlled by the Component</li>
-                    <li>The <b>state</b> can be easily passed to the Component children as <b>props</b></li>
-                    <li>In React only class component can have a state</li>
-                    <li>The <b>state</b> information is usually delcared inside the constructor</li>
-                    <ul>
-                        <li>
-                            <textarea name="" id="" cols="60" rows="12" class="code">
-import React, { Component } from 'react';
-
-class Menu extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedDish: null;
-        };
+const people = [
+    {
+        id: 0,
+        name: 'Valerio',
+        role: 'Programmer'
+    },
+    {
+        id: 1,
+        name: 'Lefemas',
+        role: 'Marketing Manager'
     }
+]
+
+// Create a JSX/HTML like element
+const element = ()=> {
+    return (
+        <div className='mainDiv'>
+            <h1>This is an H1 tag create with <b>React.createElement</b> and rendered with <b>ReactDOM.render</b></h1> <br/>
+            <p>
+                <ul>
+                    {people.map(person => (
+                        <li key={person.id}><b>Name:</b> {person.name} = <b>Role:</b> {person.role}</li>   
+                    ))}
+                </ul>
+            </p>
+            <hr/>
+        </div>
+    );
 }
-                            </textarea>
-                        </li>
-                    </ul>
-                    <li>The <b>state</b> can be only modified using the method <b>setState()</b></li>
-                    <ul>
-                        <li>
-                            <textarea name="" id="" cols="60" rows="6" class="code">
-onDishSelected(dish) {
-    this.setState({
-        selectedDish: dish;
-    })
-}
-                            </textarea>
-                        </li>
-                    </ul>
-                </ul>
-            </ul> <br><br>
 
-            <ul>
-                <li><h5>PROPS</h5></li>
-                <ul>
-                    <li>JSX Attributes are passed into a component as a single object</li>
-                    <ul>
-                        <li>Available in the component as <b>props</b></li>
-                        <li>Can pass in multiple Attributes</li>
-                        <li>Cannot modify <b>props</b> within the component</li>
-                        <ul>
-                            <li>
-                                Here the dishes are available as <b>props</b> within the Menu Component and can be accessed as this.props.dishes
-                                <textarea name="" id="" cols="60" rows="2" class="code">
-<Menu dishes={this.state.dishes} />
-                                </textarea>
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                Here dish is available as <b>props</b> within the Dishdetail Component and can be accessed as this.props.dish, and comments as this.props.comments <br>
-                                <textarea name="" id="" cols="60" rows="3" class="code">
-<Dishdetail dish={this.state.dish} comments={this.state.comments} />
-                                </textarea>
-                            </li>
-                        </ul>
-                    </ul>
-                    
-                </ul>
-            </ul> <br> <br>
+export default function myElement() {
+    return React.createElement(element, null, document.querySelector('#element'))
+};     
+                </textarea>
+            </p>
+        </p>
 
-            <ul>
-                <li><h5>HANDLING EVENTS</h5></li>
-                <ul>
-                    <li>Use <b>camelCase</b> to specify events</li>
-                    <li>Pass function as the event handler</li>
-                </ul>
-                <ul>
-                    <li>
-                       Example: <br>
-                        <textarea name="" id="" cols="60" rows="2" class="code">
-<Card onclick={()=> this.onDishSelected(dish)} />
-                        </textarea>
-                    </li>
-                </ul>
-            </ul>
-            
-            
-        </p> <br>
-    </div>
-    <!-- END OF REACT & REACT-BOOTSTRAP -->
 
-     <!-- REACT JS AND REDUX -->
-     <div class="jumbotron" id="reactAndRedux">
-        <h1>REACT JS AND REDUX</h1>
-    </div>
-
-    <div class="container">
         <h2>First Small React Project</h2> <br>
         <p class="comments">
             <b>props</b> contains all the attributes I added to my own component <br>
@@ -2134,12 +1842,382 @@ ReactDOM.render(
         </p> <br>
 
         <h4>Components Basics</h4> <br>
+
+        <p class="code">
+            import React, { Component } from 'react';
+        </p> <br>
+
+        <p class="comments">
+            So far we've seen how .createElement() and JSX can help us produce some HTML. Typically, though, we'll use one of React's key features, Components, to construct our UI. Components refer to reusable pieces of code ultimately responsible for returning HTML to be rendered onto the page. More often than not, you'll see React components written with JSX.
+        </p> <br>
+
         <p class="comments">
             In <b>React</b> we typically render only one component, the <b>App</b> component and inside the <b>App.js</b> file that hosts our <b><App /></b> component we nest all components and of course these components can be nested as well.
+        </p> <br>
+
+        <p class="comments">
+            Convert the previous <b>React Element</b> we created into a <b>React Component</b>: <br>
+            <textarea name="" id="" cols="100" rows="25" class="code">
+                
+            </textarea>
         </p>
 
     </div>
-    <!-- END OF REACT JS AND REDUX -->
+    <!-- END OF REACT JS -->
+
+        <!-- REACT & REACT BOOTSTRAP -->
+        <div class="jumbotron" id="reactSection">
+            <h1>REACT & REACT BOOTSTRAP</h1>
+        </div> <br>
+    
+        <div class="container">
+            <h4>Getting Started</h4> <br>
+    
+            <p class="comments">
+                // let's first install <b>YARN</b> <br>
+                <p class="code">
+                    sudo npm install -g yarn
+                </p> <br>
+                <p class="code">
+                    sudo yarn global add create-react-app
+                </p>
+            </p> <br>
+            
+            <p class="comments">
+                <h5>Create React App</h5> <br>
+                <p class="code">
+                    create-react-app confusion
+                </p> <br>
+                <p class="code">
+                    yarn start
+                </p> <br>
+                <p class="comments">
+                    For this training we are creating an app called "confusion" and the link to this project can be found here: <br>
+                    <ol>
+                        <li><a href="http://localhost:3001/" target="_blank">confusion react app</a></li>
+                    </ol>
+                </p>
+            </p> <br>
+    
+            <h5>JSX Flow</h5> <br>
+            <p class="comments">
+                <img src="./images/jsx.png" alt="jsx" srcset=""> <br>
+                <img src="./images/embedd-jsx.png" alt="jsx" srcset=""> <br>
+            </p>
+    
+            <h4>Configuring your React Application</h4> <br>
+    
+            <p class="comments">
+                <h5>Configure your React Project to use Reactstrap</h5> <br>
+                // First install the followings: <br>
+                <ol>
+                    <li><b>yarn add bootstrap</b></li>
+                    <li><b>yarn add reactstrap</b></li>
+                    <li><b>yarn add react-popper</b></li>
+                </ol> <br>
+            </p>
+    
+            <h4>Configure to use Bootstrap</h4> <br>
+            <a href="https://react-bootstrap.netlify.app/getting-started/introduction">react-bootstrap docs</a> <br> <br>
+            <p class="comments">
+                Next, open <b>index.js</b> file in the <b>src</b> folder and add the following line into the imports: <br>
+                <p class="code">
+                    import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+                </p>
+            </p> <br>
+    
+            <h4>Adding a Navigation Bar</h4> <br>
+            <p class="comments">
+                Open App.js in the src folder and update it as follows <br>
+                <textarea name="" id="" cols="100" rows="34" class="code">
+    import logo from './logo.svg';
+    import './App.css';
+    
+    // Importing react-bootstrap
+    import { Navbar, NavbarBrand } from 'react-bootstrap';
+    
+    function App() {
+        return (
+        <div className="App">
+            
+            {/* react-bootstrap NavBar */}
+            <Navbar dark color="primary">
+                <div className="container">
+                <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+                </div>
+            </Navbar>
+    
+            <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+            <p>
+                Edit <code>src/App.js</code> and save to reload.
+            </p>
+            <a
+                className="App-link"
+                href="https://reactjs.org"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Learn React
+            </a>
+            </header>
+        </div>
+        );
+    }
+                </textarea>
+            </p> <br>
+            
+            <h4>React Components</h4> <br>
+            <p class="comments">
+                <ol>
+                    <li>A React component returns a set of React elements that should appear on screen.</li>
+                    <li>React Components should always start with a Capital letter</li>
+                </ol>
+            </p> <br>
+    
+            <h5>Create a basic structure for a React component</h5> <br>
+            <p class="comments">
+                <textarea name="" id="" cols="100" rows="17" class="code">
+    import React, { Component } from 'react';
+    
+    class Menu extends Component {
+        // define the constructor
+        constructor(props) {
+            super(props);
+        }
+    
+        render(){
+            return ({
+    
+            });
+        }
+    }
+    
+    export default Menu;
+                </textarea>
+            </p> <br> <br>
+    
+            <h5>Final version of the Menu Component</h5> <br>
+            <p class="comments">
+                <textarea name="" id="" cols="100" rows="50" class="code">
+    import React, { Component } from 'react';
+    // react-strap 
+    import { Media } from 'react-bootstrap';
+    
+    class Menu extends Component {
+        // define the constructor
+        constructor(props) {
+            super(props);
+            // define a state for this component
+            this.state = {
+                dishes: [
+                    {
+                        id: 0,
+                        name:'Uthappizza',
+                        image: 'assets/images/uthappizza.png',
+                        category: 'mains',
+                        label:'Hot',
+                        price:'4.99',
+                        description:'A unique combination of Indian Uthappam (pancake) and Italian pizza, topped with Cerignola olives, ripe vine cherry tomatoes, Vidalia onion, Guntur chillies and Buffalo Paneer.'
+                    },
+                    {
+                        id: 1,
+                        name:'Zucchipakoda',
+                        image: 'assets/images/zucchipakoda.png',
+                        category: 'appetizer',
+                        label:'',
+                        price:'1.99',
+                        description:'Deep fried Zucchini coated with mildly spiced Chickpea flour batter accompanied with a sweet-tangy tamarind sauce'
+                    },
+                    {
+                        id: 2,
+                        name:'Vadonut',
+                        image: 'assets/images/vadonut.png',
+                        category: 'appetizer',
+                        label:'New',
+                        price:'1.99',
+                        description:'A quintessential ConFusion experience, is it a vada or is it a donut?'
+                    },
+                    {
+                        id: 3,
+                        name:'ElaiCheese Cake',
+                        image: 'assets/images/elaicheesecake.png',
+                        category: 'dessert',
+                        label:'',
+                        price:'2.99',
+                        description:'A delectable, semi-sweet New York Style Cheese Cake, with Graham cracker crust and spiced with Indian cardamoms'
+                    }
+                    ]
+            };
+        }
+    
+        render(){
+    
+            // make use of the dishes array from the state object using map
+            const menu = this.state.dishes.map((dish)=> {
+                // for every dish we return the following HTML
+                return (
+                    <div key={dish.id} className="col-12 mt-5">
+                        <Media as="li">
+                            <Media left="true" middle="true">
+                                {/* <Media object src={dish.image} alt={dish.name} /> */}
+                                <img src={dish.image} alt={dish.name} />
+                            </Media>
+                            <Media.Body className="ml-5">
+                                <h3>{dish.name}</h3>
+                                <p>{dish.description}</p>
+                            </Media.Body>
+                        </Media>
+                    </div>
+                );
+            });
+    
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Media  list="true">
+                            <ul className="list-unstyled">
+                                {/* JSX Variable declaration */}
+                                {menu}
+                            </ul>
+                        </Media>
+                    </div>
+                </div>
+            );
+        }
+    }
+    
+    export default Menu;
+                    
+    
+                </textarea>
+            </p> <br>
+    
+            <h5>Display the Menu Component in our app</h5> <br>
+            <p class="comments">
+                // Inside our <b>App.js</b> component we import the <b>Menu</b> component: <br>
+                <p class="code">
+                    import Menu from './components/MenuComponent';
+                </p> <br>
+                // An we use it inside the return statement below the NavBar we created before <br>
+                <textarea name="" id="" cols="100" rows="20" class="code">
+    import './App.css';
+    import Menu from './components/MenuComponent';
+    
+    // Importing react-bootstrap
+    import { Navbar, NavbarBrand } from 'react-bootstrap';
+    
+    function App() {
+      return (
+        <div className="App">
+          
+          {/* react-bootstrap NavBar */}
+          <Navbar bg="primary" expand="lg">
+              <div className="container">
+                <NavbarBrand href="/" className="logoName">Ristorante Con Fusion</NavbarBrand>
+              </div>
+          </Navbar>
+          {/* Menu Component */}
+          <Menu />
+        </div>
+      );
+    }
+    
+    export default App;
+                </textarea>
+            </p> <br>
+    
+            <h4>State and Props</h4> <br>
+            <p class="comments">
+                We already seen how we can pass the info to a component using <b>states</b>. Another way is with <b>props</b> <br>
+                <ul>
+                    <li><h5>STATE</h5></li>
+                    <ul>
+                        <li>Each component can store its local information in its <b>state</b></li>
+                        <li>The <b>state</b> is private and fully controlled by the Component</li>
+                        <li>The <b>state</b> can be easily passed to the Component children as <b>props</b></li>
+                        <li>In React only class component can have a state</li>
+                        <li>The <b>state</b> information is usually delcared inside the constructor</li>
+                        <ul>
+                            <li>
+                                <textarea name="" id="" cols="60" rows="12" class="code">
+    import React, { Component } from 'react';
+    
+    class Menu extends Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                selectedDish: null;
+            };
+        }
+    }
+                                </textarea>
+                            </li>
+                        </ul>
+                        <li>The <b>state</b> can be only modified using the method <b>setState()</b></li>
+                        <ul>
+                            <li>
+                                <textarea name="" id="" cols="60" rows="6" class="code">
+    onDishSelected(dish) {
+        this.setState({
+            selectedDish: dish;
+        })
+    }
+                                </textarea>
+                            </li>
+                        </ul>
+                    </ul>
+                </ul> <br><br>
+    
+                <ul>
+                    <li><h5>PROPS</h5></li>
+                    <ul>
+                        <li>JSX Attributes are passed into a component as a single object</li>
+                        <ul>
+                            <li>Available in the component as <b>props</b></li>
+                            <li>Can pass in multiple Attributes</li>
+                            <li>Cannot modify <b>props</b> within the component</li>
+                            <ul>
+                                <li>
+                                    Here the dishes are available as <b>props</b> within the Menu Component and can be accessed as this.props.dishes
+                                    <textarea name="" id="" cols="60" rows="2" class="code">
+    <Menu dishes={this.state.dishes} />
+                                    </textarea>
+                                </li>
+                            </ul>
+                            <ul>
+                                <li>
+                                    Here dish is available as <b>props</b> within the Dishdetail Component and can be accessed as this.props.dish, and comments as this.props.comments <br>
+                                    <textarea name="" id="" cols="60" rows="3" class="code">
+    <Dishdetail dish={this.state.dish} comments={this.state.comments} />
+                                    </textarea>
+                                </li>
+                            </ul>
+                        </ul>
+                        
+                    </ul>
+                </ul> <br> <br>
+    
+                <ul>
+                    <li><h5>HANDLING EVENTS</h5></li>
+                    <ul>
+                        <li>Use <b>camelCase</b> to specify events</li>
+                        <li>Pass function as the event handler</li>
+                    </ul>
+                    <ul>
+                        <li>
+                           Example: <br>
+                            <textarea name="" id="" cols="60" rows="2" class="code">
+    <Card onclick={()=> this.onDishSelected(dish)} />
+                            </textarea>
+                        </li>
+                    </ul>
+                </ul>
+                
+                
+            </p> <br>
+        </div>
+        <!-- END OF REACT & REACT-BOOTSTRAP -->
 
 
 </body>
