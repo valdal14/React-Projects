@@ -1823,58 +1823,6 @@ document.getElementById('root')
             Of course create each element using <b>React.createElement</b> is very complex and confusing and this is why we prefer <b>JSX</b> syntax
         </p> <br><br>
 
-
-        <h2>First Small React Project</h2> <br>
-        <p class="comments">
-            <b>props</b> contains all the attributes I added to my own component <br>
-            <textarea name="" id="" cols="100" rows="15">
-export default function App(props) {
-    return (
-        <div className="person">
-        <h1 className="name">{props.name}</h1>
-        <p className="age">Your age: {props.age}</p>
-        </div>
-    );
-}
-
-ReactDOM.render(
-  <React.StrictMode>
-    {/* props allows us to retrieve the attributes associated to the App component */}
-    <App name='Valdal14' age='42' />
-    <App name='Lefemas' age='45' />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-            </textarea> <br> <br>
-
-            <p class="comments">
-                We could also create a variable that hosts JSX code and the components and render them using react dom <br>
-                <textarea name="" id="" cols="100" rows="15">
-export default function Person(props) {
-    return (
-        <div className="person">
-        <h1 className="name">{props.name}</h1>
-        <p className="age">Your age: {props.age}</p>
-        </div>
-    );
-}
-                    
-let app = (
-    // components must be wrapped inside a div since JSX only allows one root element
-    <div>
-      <Person name='Valdal14' age='42' />
-      <Person name='Lefemas' age='45' />
-    </div>
-  );
-  
-ReactDOM.render(
-    app,
-    document.getElementById('root')
-);
-                                </textarea> <br> <br>
-            </p>
-        </p> <br>
-
         <h4>create-react-app with specific structure</h4>
         <p class="code">
             create-react-app myapp --scripts-version 1.1.5
@@ -2101,12 +2049,126 @@ export default App;
             </ol>
         </p> <br>
 
+        <h4>Return Dynamic Content from functions</h4> <br>
+        <textarea name="" id="" cols="100" rows="15">
+import React from 'react';
+
+const generateRandomNumber = () => { 
+    return Math.floor(Math.random() * 90) 
+}
+
+// React must be imported since the following will be converted in React.createElement and JSX
+// We do not need to import Component tho since we are not using a class
+const person = () => {
+    return (
+        <div>
+            <h2>I'am a <b>Functional Component</b></h2>
+            <p>I can generate random number like { generateRandomNumber() }</p>
+        </div>
+    )
+};
+
+export default person; 
+        </textarea> <br> <br>
+
         <h4>React PROPS</h4> <br>
 
         <p class="comments">
-            <b>Props</b> allows you to pass data into Components. Each component will automatically have access to <b>props</b> once created
-        </p>
+            <b>Props</b> allows you to pass data into Components. Each component will automatically have access to <b>props</b> once created. <br>
+            <ol>
+                <li>For normal HTML elements we can pass attributes such as <b>className</b></li>
+                <li>For <b>React Components/Elements</b> we can use <b>props</b> to pass dynamic content</li>
+                <li><b>Note:</b> If we use <b>Class Components</b> we must use <b>this.props</b></li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="20" class="code">
+import React from 'react';
 
+const generateRandomNumber = () => { 
+    return Math.floor(Math.random() * 90) 
+}
+
+// React must be imported since the following will be converted in React.createElement and JSX
+// We do not need to import Component tho since we are not using a class
+
+// We must use props parameter inside our functional component to be able to create props.name and props.age
+const person = (props) => {
+    return (
+        <div>
+            <h2>I'am a <b>Functional Component</b></h2>
+            <p>I can generate random number like { generateRandomNumber() }</p>
+            <p>I can also use <b>props</b> like so:</p>
+            {/* creating a props called name and age */}
+            <p>My name is {props.name} and I am {props.age}</p>
+            <hr/>
+        </div>
+    )
+};
+
+export default person;
+            </textarea>
+        </p> <br>
+
+        <h4>Children Props</h4> <br>
+        <p class="comments">
+            With the term <b>Children Props</b> I mean content passed inside a NON-Self-Closed component like so: <br>
+            <textarea name="" id="" cols="100" rows="2" class="code">
+{/* Using Children props inside Components */}
+<Person name="Lefemas" age="45" > My Hobby is: x</Person>
+            </textarea> <br>
+            There is a special <b>props</b> to do so that is provided with <b>React</b> and this is <b>props.children</b>. The reserved word <b>children</b>
+            in React refers to any elements between the opening and closing tag of our Components. <br>
+            <b>Note:</b> <b>props.children</b> does not have to be passed to all components
+            <textarea name="" id="" cols="100" rows="6">
+// Person.js
+
+{/* creating a props called name and age */}
+<p>My name is {props.name} and I am {props.age}</p>
+<p>{props.children}</p>
+
+// App.js
+
+{/* Using Children props inside Components */}
+<Person name="Lefemas" age="45" > My Hobby is: Reading</Person>
+            </textarea>
+        </p> <br>
+
+        <h4>Using State</h4> <br>
+        <p class="comments">
+            Sometimes we do not want to get some info from outside our components but we want to have it inside our components and bein able to change it from inside. <br>
+            <b>I.E:</b> Suppose we have a button inside our App.js file and if we press it we want to change the props inside one of our component. <br>
+            This is only possible of course if the props are not hardcoded values. <br>
+            <b>NOTE:</b> This only works for <b>Class Components</b> since it is a special property inherited from the <b>React Component</b> class. <br>
+            <b>state</b> is the special property we can use inside <b>Class Components</b> and <b>setState()</b> is the method we can call to change the property value. <br>
+            I am going to change the App.js from a Functional Component to a Class Component to demostrate it. <br>
+            <textarea name="" id="" cols="100" rows="25" class="code">
+// FROM FUNCTIONAL Component....
+function App() {
+    return (
+      <div className="App">
+        {/* Using props inside Components */}
+       <Person name="Valerio" age="42" />
+       {/* Using Children props inside Components */}
+       <Person name="Lefemas" age="45" > My Hobby is: Reading</Person>
+      </div>
+    );
+  }
+  
+// TO CLASS Component
+  class App extends Component {
+    
+    render(){
+      return (
+        <div className="App">
+          {/* Using props inside Components */}
+         <Person name="Valerio" age="42" />
+         {/* Using Children props inside Components */}
+         <Person name="Lefemas" age="45" > My Hobby is: Reading</Person>
+        </div>
+      );
+    }
+  }
+            </textarea>
+        </p> <br>
 
     </div>
     <!-- END OF REACT JS -->
