@@ -2138,8 +2138,15 @@ export default person;
             <b>I.E:</b> Suppose we have a button inside our App.js file and if we press it we want to change the props inside one of our component. <br>
             This is only possible of course if the props are not hardcoded values. <br>
             <b>NOTE:</b> This only works for <b>Class Components</b> since it is a special property inherited from the <b>React Component</b> class. <br>
+            Where <b>props</b> are set and passed from outside, <b>states</b> are set and managed from inside a component. <br>
+            In React 16.8 a new feature called <b>hooks</b> allows to manage states using functional components. <br>
+            In any event we should always rely on <b>Functional Components</b> when possible because managing states on multiple components can be problematic and makes our app unpredicable. <br>
+            We Initilize <b>state</b> as a <b>JS</b> object and as I mentioned we use it to manage internal component's data.<br>
+            If the <b>state</b> changes will lead React to re-render/update the DOM. <br><br>
+            <b>Note: </b> See below example: <br>
             <b>state</b> is the special property we can use inside <b>Class Components</b> and <b>setState()</b> is the method we can call to change the property value. <br>
-            I am going to change the App.js from a Functional Component to a Class Component to demostrate it. <br>
+            <b>P.S:</b> I am going to change the App.js from a Functional Component to a Class Component to demostrate it. <br><br>
+
             <textarea name="" id="" cols="100" rows="25" class="code">
 // FROM FUNCTIONAL Component....
 function App() {
@@ -2169,6 +2176,143 @@ function App() {
   }
             </textarea>
         </p> <br>
+
+        <h5>State Example inside a Class Component</h5> <br>
+        <textarea name="" id="" cols="100" rows="40" class="code">
+import React, { Component } from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+class App extends Component {
+  // React state
+  state = {
+    person: [
+      {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+      },
+      {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+      },
+    ]
+  }
+
+  render(){
+    return (
+      <div className="App">
+        {/* Using state inside Components */}
+       <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+       {/* Using Children props inside Components */}
+       <Person name={this.state.person[1].name} age={this.state.person[1].age} > My Hobby is: Reading</Person>
+      </div>
+    );
+  }
+}
+
+export default App;
+        </textarea> <br> <br>
+
+        <h4>Event Handling in React</h4> <br>
+        <p class="comments">
+            This is the React list of avilable events <br><br>
+            <a href="https://reactjs.org/docs/events.html#supported-events">React Events</a>
+        </p> <br>
+        <p class="comments">
+            We are going to add a <b>button</b> element in our <b>App.js Component</b> <br>
+            <ol>
+                <li>Never ever add () to the handler otherwise it will be called immediatly just pass the reference</li>
+                <li><b>Example</b></li>
+                <li>
+                    <p class="code">
+                        <textarea name="" id="" cols="80" rows="2" class="code">
+<button onClick={this.switchNameHandler()}>Switch Users</button>
+                        </textarea>
+                    </p>
+                </li>
+                <li><b>Note:</b> Always use the method <b>setState</b> to update the state</li>
+                <li><b>setState</b> takes an object and a callback as arguments</li>
+                <li>If in our <b>state</b> we defined additional states properties, the <b>setState</b> call will only affect the parameter we pass in as object</li>
+            </ol> <br>
+
+            <textarea name="" id="" cols="100" rows="80" class="code">
+import React, { Component } from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+class App extends Component {
+    // React state
+    state = {
+    person: [
+        {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+        },
+        {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+        },
+    ]
+    }
+
+    switchNameHandler = ()=> {
+    if (this.state.person[0].name === 'Valerio') {
+        this.setState({
+        // updating just person state
+        person: [
+            {
+            id: 0,
+            name: 'Lefemas',
+            age: 45
+            },
+            {
+            id: 1,
+            name: 'Valerio',
+            age: 42
+            },
+        ]
+        })
+    } else {
+        this.setState({
+        person: [
+            {
+            id: 0,
+            name: 'Valerio',
+            age: 42
+            },
+            {
+            id: 1,
+            name: 'Lefemas',
+            age: 45
+            },
+        ]
+        })
+    }
+    }
+
+    render(){
+    return (
+        <div className="App">
+        {/* Change the state value using setState method */}
+        {/* Never ever add () to the handler otherwise it will be called immediatly */}
+        <button onClick={this.switchNameHandler}>Switch Users</button>
+
+        {/* Using state inside Components */}
+        <Person name={this.state.person[0].name} age={this.state.person[0].age} />
+        {/* Using Children props inside Components */}
+        <Person name={this.state.person[1].name} age={this.state.person[1].age} > My Hobby is: Reading</Person>
+        </div>
+    );
+    }
+}
+
+export default App;
+            </textarea>
+        </p> <br><br>
 
     </div>
     <!-- END OF REACT JS -->
