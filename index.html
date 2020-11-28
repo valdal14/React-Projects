@@ -2050,7 +2050,7 @@ export default App;
         </p> <br>
 
         <h4>Return Dynamic Content from functions</h4> <br>
-        <textarea name="" id="" cols="100" rows="15">
+        <textarea name="" id="" cols="100" rows="15" class="code">
 import React from 'react';
 
 const generateRandomNumber = () => { 
@@ -2313,6 +2313,183 @@ class App extends Component {
 export default App;
             </textarea>
         </p> <br><br>
+
+        <h4>useState() Hook</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>As I mentioned above since React 16.8 there is a way to manage states from a Functional Component.</li>
+                <li>We will learn more about <b>Hooks</b> later in this training.</li>
+                <li>In order to demostrate/introduce React <b>Hooks</b> I am going once again convert the <b>App</b> Component from Class to Functional</li>
+                <li><b>useState()</b> is the hook that allows us to use <b>states</b> inside a Functional Component</li>
+                <b>We pass our initial state inside the <b>useState()</b> as arguments</b>
+                <b><b>useState()</b> returns an array with exactly 2 elements</b>
+                <ol>
+                    <li>1st element: <b>It will be always our current state (And when we change it the update version of it)</b></li>
+                    <li>2nd element: <b>It will be always a function that allows us to to update this state (React will update the DOM)</b></li>
+                    <ul>
+                        <li>We can assign the return value to a <b>array</b> variable or...</li>
+                        <li>Use the JS <b>destrucring</b> feature to assign the return value to two variable like so:</li>
+                        <ol>
+                            <li>
+                                <p class="code">const [personState, setPersonState] = useState({ myCurrentState })</p>
+                            </li>
+                            <li><b>See below example:</b></li>
+                        </ol>
+                    </ul>
+                </ol>
+            </ol> <br>
+
+            <textarea name="" id="" cols="100" rows="60" class="code">
+// imported the useState Hook from React
+import React, { useState } from 'react';
+import './App.css';
+import Person from './Person/Person';
+
+
+function App(props) {
+  // React hook for functional components
+  const [ personState, setPersonState ] = useState({
+    person: [
+      {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+      },
+      {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+      },
+    ]
+  })
+
+  const switchNameHandler = ()=> {
+    // get to the Hook state
+    if (personState.person[0].name === 'Valerio'){
+      // setting the new state
+      setPersonState({
+        person: [
+          {
+            id: 0,
+            name: 'Lefemas',
+            age: 45
+          },
+          {
+            id: 1,
+            name: 'Valerio',
+            age: 42
+          },
+        ]
+      })
+    } else {
+      // setting the new state
+      setPersonState({
+        person: [
+          {
+            id: 0,
+            name: 'Valerio',
+            age: 42
+          },
+          {
+            id: 1,
+            name: 'Lefemas',
+            age: 45
+          },
+        ]
+      })
+    }
+  }
+
+  return(
+    <div className="App">
+        {/* Change the state value using setState method */}
+        {/* Never ever add () to the handler otherwise it will be called immediatly */}
+        <button onClick={switchNameHandler}>Switch Users</button>
+
+        {/* Using state inside Components */}
+       <Person name={personState.person[0].name} age={personState.person[0].age} />
+       {/* Using Children props inside Components */}
+       <Person name={personState.person[1].name} age={personState.person[1].age} > My Hobby is: Reading</Person>
+      </div>
+  )
+}
+
+export default App;
+            </textarea> <br><br>
+
+            <ol>
+                <li><b>Note:</b> using <b>useState()</b> in a Functional Component DOES NOT mantain other <b>states</b> inside the Component</li>
+                <li>If we have an additional state it will be removed</li>
+                <li>The second element inside the return value of the <b>useState()</b> (The function) does not merge the value of the second state</li>
+                <li>Example:</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="10" class="code">
+const [ personState, setPersonState ] = useState({
+    person: [
+        {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+        },
+        {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+        },
+    ],
+    // Additional state
+    secondState: 'This is an additional state'
+})
+            </textarea> <br>
+            <p class="comments">
+                As we can see from the below image when we click on the button the second time, the <b>secondState</b> state is missing and no loger merged.
+                With <b>Class Components</b> this DOES NOT happen. It replace the old state, therefore we either pass the <b>secondState</b> state inside the function
+                that will update the state or we will be losing it. <br><br>
+                <b>Example: </b> <br><br>
+                <textarea name="" id="" cols="100" rows="18" class="code">
+setPersonState({
+    person: [
+        {
+        id: 0,
+        name: 'Lefemas',
+        age: 45
+        },
+        {
+        id: 1,
+        name: 'Valerio',
+        age: 42
+        },
+    ],
+    // Also passing the Additional state with Hooks to avoid losing it
+    secondState: personState.secondState
+})
+                </textarea>
+            </p> <br><br>
+
+            <b>Note: </b> The best approach is to use <b>useState()</b> multiple time for each state property we want to manage: (multiple state only for Functional Components) <br><br>
+            <textarea name="" id="" cols="100" rows="18" class="code">
+const [ personState, setPersonState ] = useState({
+    person: [
+        {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+        },
+        {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+        },
+    ]
+    })
+
+    // Setting up multiple hooks with useState to manage different states in our functional component
+
+    const [ secondState, setSecondState ] = useState({
+    otherState: 'This is another state'
+    })
+            </textarea>
+        </p> <br>
 
     </div>
     <!-- END OF REACT JS -->
