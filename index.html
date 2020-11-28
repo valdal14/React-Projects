@@ -2440,11 +2440,13 @@ const [ personState, setPersonState ] = useState({
     // Additional state
     secondState: 'This is an additional state'
 })
-            </textarea> <br>
+            </textarea> <br> <br>
+            
             <p class="comments">
                 As we can see from the below image when we click on the button the second time, the <b>secondState</b> state is missing and no loger merged.
                 With <b>Class Components</b> this DOES NOT happen. It replace the old state, therefore we either pass the <b>secondState</b> state inside the function
                 that will update the state or we will be losing it. <br><br>
+                <img src="images/useState.png" alt="useState" srcset=""> <br><br>
                 <b>Example: </b> <br><br>
                 <textarea name="" id="" cols="100" rows="18" class="code">
 setPersonState({
