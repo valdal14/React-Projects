@@ -2493,8 +2493,218 @@ const [ personState, setPersonState ] = useState({
             </textarea>
         </p> <br>
 
+        <h4>Stateless vs Stateful Components</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>Does not matter if you are using Functional or Class Components you can always differenciate them as Stateless and Stateful</li>
+                <li><b>Stateful</b> is a Functional or Class component that manages states</li>
+                <li><b>Stateless</b> is a component (like our Person.js Component) that does not have an internal state</li>
+                <li><b>Stateless</b> Components get external data and output them without managing states</li>
+                <li>The best-practice is to create as many as <b>Stateless</b> Components as possible in our React app</li>
+
+            </ol>
+        </p> <br> <br>
+
+        <h4>Passing Methods References between Components</h4> <br>
+        <p class="comments">
+            <ol>
+                <li><b>Use case: </b>Suppose we want execute a method we created inside one Component directly from another component.</li>
+                <li><b>I.E:</b> We can add the <b>onClick</b> event on the <b>Person</b> component and pass a reference to the method we want to
+                execute as a property to the component we want to execute it. 
+                </li>
+                <li><b>Note: </b>We can pass methods as <b>props</b></li>
+                <li>Basically we can chance the state of a Component from another Stateless Component that does not have a state like in the below example</li>
+                <li><b>Example:</b></li>
+            </ol> <br>
+
+            <textarea name="" id="" cols="100" rows="15" class="code">
+// App.js
+{/* Passing the switchNameHandler as props */}
+<Person 
+name={this.state.person[0].name} 
+age={this.state.person[0].age} 
+click={this.switchNameHandler} 
+/>
+
+// Person.js
+<h2 onClick={props.click}>I'am a <b>Functional Component</b></h2>
+
+            </textarea> <br><br>
+
+            <ol>
+                <li>We can also pass <b>values</b> as arguments inside the function we will be passing to a different component</li>
+                <li>We use dot-notation and at the end of the method we are calling as props we add the <b>bind(this)</b> or <b>bind(this, 'Value')</b></li>
+                <li><b>this</b> inside the <b>.bind()</b> method will control the <b>this</b> inside the function itself</li>
+                <li>The other way of passing the arguments is by passing an <b>arrow</b> function inside the <b>onClick</b> event and the body of the <b>arrow function</b> will be a function call</li>
+                <li>Event tho the best approach is to use the <b>.bind()</b> syntax</li>
+            </ol> <br>
+
+            <textarea name="" id="" cols="100" rows="45" class="code">
+// FUNCTION 
+
+// We modified adding the paramater newName
+
+switchNameHandler = (newName)=> {
+    if (this.state.person[0].name === newName) {
+      this.setState({
+        // updating just person state
+        person: [
+          {
+            id: 0,
+            name: 'Lefemas',
+            age: 45
+          },
+          {
+            id: 1,
+            name: 'Valerio',
+            age: 42
+          },
+        ]
+      })
+    } else {
+      this.setState({
+        person: [
+          {
+            id: 0,
+            name: 'Valerio',
+            age: 42
+          },
+          {
+            id: 1,
+            name: 'Lefemas',
+            age: 45
+          },
+        ]
+      })
+    }
+  }
+
+// FIRST APPROACH
+<button onClick={this.switchNameHandler.bind(this, 'Valerio')}>Switch Users</button>
+
+// SECOND APPROACH
+<Person 
+name={this.state.person[0].name} 
+age={this.state.person[0].age} 
+click={(event)=> { this.switchNameHandler('Valerio') }} 
+/>
+            </textarea>
+            
+        </p> <br><br>
+
+        <h4>Two-Ways Binding</h4> <br>
+        <p class="comments">
+            <ol>
+                <li><b>Use case: </b>We have an <b>input</b> element inside the <b>Person</b> Component and we want to use the value as the <b>newName</b></li>
+                <li>
+                    We add a new event handler in the <b>input</b> field inside the <b>Person</b> Component: <br>
+                </li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="2" class="code">
+// changeName is a prop we use inside App.js Person component
+<input type='text' onChange={ props.changeName } value={props.name} />
+            </textarea> <br>
+
+            <ol>
+                <li>We create a new function that takes an event as argument inside the <b>App.js</b> Component in which we will pass <b>event.target.value</b> to access to the input value and in the same <b>App.js</b> Component we will add a <b>changeName</b> event as props to be able to pass the method to the <b>Person</b> Component</li>
+                <li><b>Note: </b>The <b>event</b> object will be passed automatically we do not really need to use <b>bind(this)</b> in this case</li>
+                <li><b>Note: </b>If we want to see the value of the <b>input</b> we can bind the <b>value</b> property of the <b>input</b> to the <b>props.name</b> of the Component</li>
+                <li>If we pass the <b>value={}</b> on the <b>input</b> we will get the following tho:</li>
+                <ol>
+                    <li style="color: red;">
+                        "Warning: You provided a `value` prop to a form field without an `onChange` handler. This will render a read-only field. If the field should be mutable use `defaultValue`. Otherwise, set either `onChange` or `readOnly`."
+                    </li>
+                    <li>We can update our previous <b>input</b> value like so:</li>
+                </ol>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="2" class="code">
+// Adding the defaultValue to supress the warning
+<input type='text' onChange={ props.changeName } defaultValue={props.name} />
+            </textarea> <br> <br>
+
+            <textarea name="" id="" cols="100" rows="25" class="code">
+nameChangedHandler = (event)=>{
+    console.log(event.target.value);
+    this.setState({
+        // updating just person state
+        person: [
+        {
+            id: 0,
+            // we then access the event.target.value of the input
+            name: event.target.value,
+            age: 45
+        },
+        {
+            id: 1,
+            name: 'Valerio',
+            age: 42
+        },
+        ]
+    })
+    }
+
+<Person 
+    name={this.state.person[1].name} 
+    age={this.state.person[1].age} 
+    changeName={this.nameChangedHandler.bind(this)}
+> My Hobby is: Reading</Person>
+            </textarea>
+        </p> <br> <br>
+
+
+        <h4>Adding Styles</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>Let's create a <b>Person.css</b> file to the <b>Person</b> Component and import it and add it as a class to the root div</li>
+            </ol>
+        </p> <br>
+
+        <textarea name="" id="" cols="100" rows="20" class="code">
+// CSS File
+.Person {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 2px 3px #cccccc;
+    padding: 16px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+// Person Component
+import './Person.css';
+<div className='Person'></div>
+
+        </textarea> <br>
+
+        <ol>
+            <li>We can also use css styles inline</li>
+            <li>In the <b>App.js</b> inside the <b>render</b> function we will add a new constant named <b>style</b></li>
+            <li>Finally we add the <b>style</b> property to the <b>button</b></li>
+        </ol> <br>
+
+        <textarea name="" id="" cols="100" rows="18" class="code">
+render() {
+    // Inline styles with JS
+    const style = {
+        backgroundColor: 'white',
+        border: '1px solid blue',
+        padding: '8px',
+        cursor: 'pointer'
+      };
+
+      return(
+        <button style={style} onClick={this.switchNameHandler.bind(this, 'Valerio')}>Switch Users</button>
+      )
+
+}
+        </textarea>
+        
     </div>
     <!-- END OF REACT JS -->
+
+
 
         <!-- REACT & REACT BOOTSTRAP -->
         <div class="jumbotron" id="reactSection">
