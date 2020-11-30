@@ -102,34 +102,38 @@ class App extends Component {
       cursor: 'pointer'
     };
 
-    return (
-      <div className="App">
-        {/* Change the state value using setState method */}
-        {/* Never ever add () to the handler otherwise it will be called immediatly */}
-        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
-
-        {/* Using JS to render content condionally */}
-       {
-         this.state.showPerson ?
+    // Using pure JS to render JSX or React.createElement based on conditions
+    const person = ()=>{
+      if (this.state.showPerson) {
+        return(
           <div>
           <Person 
             name={this.state.person[0].name} 
             age={this.state.person[0].age} 
             click={(event)=> { this.switchNameHandler('Valerio') }} 
             />
-  
+
           {/* Using Children props inside Components */}
           <Person 
             name={this.state.person[1].name} 
             age={this.state.person[1].age} 
             changeName={this.nameChangedHandler.bind(this)}
             > My Hobby is: Reading</Person>
-  
-            <Person 
-              name={this.state.person[2].name} 
-              age={this.state.person[2].age} /> 
-          </div> : console.log('Hide Persons on click event')
-       }
+
+            <Person
+              name={this.state.person[2].name}
+              age={this.state.person[2].age} />
+          </div>
+        )
+      }
+    }
+
+    return (
+      <div className="App">
+        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
+
+        {/* Calling the method to to return JSX based on the state condition */}
+        { person() }
 
       </div>
     );
