@@ -2699,7 +2699,83 @@ render() {
       )
 
 }
-        </textarea>
+        </textarea> <br><br>
+
+        <h4>Render Content Conditionally</h4> <br>
+        <p class="comments">
+            <b>Use case: </b> When we click on a <b>Person</b> we want to hide it from the DOM <br>
+            <ol>
+                <li>We can wrap all the <b>Person</b> Components inside the <b>App</b> Component inside a div</li>
+                <li>We create a new method named <b>togglePersonHandler</b> and we assign it to the onClick event inside our <b>Person</b> Component on our button</li>
+                <li>We add a new property to our state named <b>showPerson: false</b></li>
+                <li>Finally we want it to be rendered dynamically based on the condition of our state property:</li>
+                <ol>
+                    <li>We wrap the all <b>div</b> with <b>{}</b></li>
+                    <li>We can use pure JS code inside it and in this case I will be using a <b>ternary expression</b> and we CANNOT use if/then conditionals in the block</li>
+                    <li>Finally we write a conditional statement inside our method to check whether the state variable is true or false and update its state accordingly</li>
+                </ol>
+            </ol> <br><br>
+            <textarea name="" id="" cols="100" rows="30" class="code">
+// New state 
+state = {
+    person: [
+      {
+        id: 0,
+        name: 'Valerio',
+        age: 42
+      },
+      {
+        id: 1,
+        name: 'Lefemas',
+        age: 45
+      },
+      {
+        id: 2,
+        name: 'missilotta',
+        age: 0
+      },
+    ],
+    // new state variable
+    showPerson: false
+  }
+
+  // Event handler
+  togglePersonHandler = () => {
+    if (this.state.showPerson) {
+      this.setState({
+        showPerson: false
+      })
+    } else {
+      this.setState({
+        showPerson: true
+      })
+    }
+  }
+
+  // render and return
+  {
+    this.state.showPerson ?
+     <div>
+     <Person 
+       name={this.state.person[0].name} 
+       age={this.state.person[0].age} 
+       click={(event)=> { this.switchNameHandler('Valerio') }} 
+       />
+
+     {/* Using Children props inside Components */}
+     <Person 
+       name={this.state.person[1].name} 
+       age={this.state.person[1].age} 
+       changeName={this.nameChangedHandler.bind(this)}
+       > My Hobby is: Reading</Person>
+
+       <Person 
+         name={this.state.person[2].name} 
+         age={this.state.person[2].age} /> 
+     </div> : console.log('Hide Persons on click event')
+  }
+            </textarea>
+        </p>
         
     </div>
     <!-- END OF REACT JS -->
@@ -3057,14 +3133,34 @@ render() {
                 
                 
             </p> <br>
+
         </div>
         <!-- END OF REACT & REACT-BOOTSTRAP -->
 
-
+        <button class="btn btn-primary goUp" onclick="scrollToTop();" id="myBtn">Scroll up</button>
 </body>
 <!-- SCRIPTS SECTION -->
 <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
 <script src="./node_modules/@popperjs/core/dist/umd/popper-base.min.js"></script>
 <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script>
+
+    mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function scrollToTop() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
 <!-- END SCRIPTS SECTION -->
 </html>

@@ -25,3 +25,17 @@ body {
 img {
   max-width: 100%;
 }
+
+.goUp {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
+ filter: progid: dximagetransform.microsoft.basicimage(rotation=3);
+  text-align: center;
+  text-decoration: none;
+}

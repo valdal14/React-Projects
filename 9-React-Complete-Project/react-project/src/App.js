@@ -16,7 +16,14 @@ class App extends Component {
         name: 'Lefemas',
         age: 45
       },
-    ]
+      {
+        id: 2,
+        name: 'missilotta',
+        age: 0
+      },
+    ],
+    // new state variable
+    showPerson: false
   }
 
   switchNameHandler = (newName)=> {
@@ -74,6 +81,18 @@ class App extends Component {
     })
   }
 
+  togglePersonHandler = () => {
+    if (this.state.showPerson) {
+      this.setState({
+        showPerson: false
+      })
+    } else {
+      this.setState({
+        showPerson: true
+      })
+    }
+  }
+
   render(){
     // Inline styles with JS
     const style = {
@@ -87,21 +106,31 @@ class App extends Component {
       <div className="App">
         {/* Change the state value using setState method */}
         {/* Never ever add () to the handler otherwise it will be called immediatly */}
-        <button style={style} onClick={this.switchNameHandler.bind(this, 'Valerio')}>Switch Users</button>
+        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
 
-        {/* Passing the switchNameHandler as props */}
-       <Person 
-        name={this.state.person[0].name} 
-        age={this.state.person[0].age} 
-        click={(event)=> { this.switchNameHandler('Valerio') }} 
-        />
+        {/* Using JS to render content condionally */}
+       {
+         this.state.showPerson ?
+          <div>
+          <Person 
+            name={this.state.person[0].name} 
+            age={this.state.person[0].age} 
+            click={(event)=> { this.switchNameHandler('Valerio') }} 
+            />
+  
+          {/* Using Children props inside Components */}
+          <Person 
+            name={this.state.person[1].name} 
+            age={this.state.person[1].age} 
+            changeName={this.nameChangedHandler.bind(this)}
+            > My Hobby is: Reading</Person>
+  
+            <Person 
+              name={this.state.person[2].name} 
+              age={this.state.person[2].age} /> 
+          </div> : console.log('Hide Persons on click event')
+       }
 
-       {/* Using Children props inside Components */}
-       <Person 
-        name={this.state.person[1].name} 
-        age={this.state.person[1].age} 
-        changeName={this.nameChangedHandler.bind(this)}
-        > My Hobby is: Reading</Person>
       </div>
     );
   }
