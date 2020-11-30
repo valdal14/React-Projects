@@ -26,59 +26,9 @@ class App extends Component {
     showPerson: false
   }
 
-  switchNameHandler = (newName)=> {
-    if (this.state.person[0].name === newName) {
-      this.setState({
-        // updating just person state
-        person: [
-          {
-            id: 0,
-            name: 'Lefemas',
-            age: 45
-          },
-          {
-            id: 1,
-            name: 'Valerio',
-            age: 42
-          },
-        ]
-      })
-    } else {
-      this.setState({
-        person: [
-          {
-            id: 0,
-            name: 'Valerio',
-            age: 42
-          },
-          {
-            id: 1,
-            name: 'Lefemas',
-            age: 45
-          },
-        ]
-      })
-    }
-  }
-
+  // FROM HERE ......
   nameChangedHandler = (event)=>{
     console.log(event.target.value);
-    this.setState({
-      // updating just person state
-      person: [
-        {
-          id: 0,
-          // we then access the event.target.value of the input
-          name: event.target.value,
-          age: 45
-        },
-        {
-          id: 1,
-          name: 'Valerio',
-          age: 42
-        },
-      ]
-    })
   }
 
   togglePersonHandler = () => {
@@ -103,37 +53,35 @@ class App extends Component {
     };
 
     // Using pure JS to render JSX or React.createElement based on conditions
-    const person = ()=>{
-      if (this.state.showPerson) {
+    let people = null;
+
+    if (this.state.showPerson) {
+      // Use map to generate JSX code li elements with Person Component inside it and event handler
+      const listOfPeople = this.state.person.map((p) => {
         return(
-          <div>
-          <Person 
-            name={this.state.person[0].name} 
-            age={this.state.person[0].age} 
-            click={(event)=> { this.switchNameHandler('Valerio') }} 
-            />
+          <li key={p.id}>
+            <Person name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } />
+          </li>
+        );
+      });
 
-          {/* Using Children props inside Components */}
-          <Person 
-            name={this.state.person[1].name} 
-            age={this.state.person[1].age} 
-            changeName={this.nameChangedHandler.bind(this)}
-            > My Hobby is: Reading</Person>
-
-            <Person
-              name={this.state.person[2].name}
-              age={this.state.person[2].age} />
-          </div>
-        )
-      }
+      // Create a JSX with the array of people in the state
+      people = (
+        <div>
+          <ol>
+            { listOfPeople }
+          </ol>
+        </div>
+      )
     }
+    
 
     return (
       <div className="App">
         <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
 
         {/* Calling the method to to return JSX based on the state condition */}
-        { person() }
+        { people }
 
       </div>
     );

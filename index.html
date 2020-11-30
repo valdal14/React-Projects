@@ -2794,37 +2794,37 @@ render(){
     };
 
     // Using pure JS to render JSX or React.createElement based on conditions
-    const person = ()=>{
-        if (this.state.showPerson) {
-        return(
-            <div>
-            <Person 
-            name={this.state.person[0].name} 
-            age={this.state.person[0].age} 
-            click={(event)=> { this.switchNameHandler('Valerio') }} 
-            />
+    let person = null;
 
-            {/* Using Children props inside Components */}
-            <Person 
+    if (this.state.showPerson) {
+        // set person to the following JSX or React.createElement
+        person = (
+        <div>
+        <Person 
+            name={this.state.person[0].name} 
+            age={this.state.person[0].age}  />
+
+        {/* Using Children props inside Components */}
+        <Person 
             name={this.state.person[1].name} 
             age={this.state.person[1].age} 
             changeName={this.nameChangedHandler.bind(this)}
             > My Hobby is: Reading</Person>
 
             <Person
-                name={this.state.person[2].name}
-                age={this.state.person[2].age} />
-            </div>
+            name={this.state.person[2].name}
+            age={this.state.person[2].age} />
+        </div>
         )
-        }
     }
+    
 
     return (
         <div className="App">
         <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
 
         {/* Calling the method to to return JSX based on the state condition */}
-        { person() }
+        { person }
 
         </div>
     );
@@ -2834,8 +2834,52 @@ render(){
 
         <h4>Working with Lists</h4> <br>
         <p class="comments">
-            
-        </p>
+            Better example using <b>map</b> and returning <b>Person</b> Component inside an <b>li</b> tag <br><br>
+            <textarea name="" id="" cols="100" rows="50" class="code">
+render(){
+    // Inline styles with JS
+    const style = {
+        backgroundColor: 'white',
+        border: '1px solid blue',
+        padding: '8px',
+        cursor: 'pointer'
+    };
+
+    // Using pure JS to render JSX or React.createElement based on conditions
+    let people = null;
+
+    if (this.state.showPerson) {
+        // Use map to generate JSX code li elements with Person Component inside it and event handler
+        const listOfPeople = this.state.person.map((p) => {
+        return(
+            <li key={p.id}>
+            <Person name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } />
+            </li>
+        );
+        });
+
+        // Create a JSX with the array of people in the state
+        people = (
+        <div>
+            <ol>
+            { listOfPeople }
+            </ol>
+        </div>
+        )
+    }
+    
+
+    return (
+        <div className="App">
+        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
+
+        {/* Calling the method to to return JSX based on the state condition */}
+        { people }
+
+        </div>
+    );                
+            </textarea>
+        </p> <br><br>
         
     </div>
     <!-- END OF REACT JS -->
