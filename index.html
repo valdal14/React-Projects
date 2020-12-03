@@ -2908,8 +2908,46 @@ deletePerson={ this.deletePersonHandler.bind(this, index) }
                 <li>Finally inside the <b>deletePersonHandler</b> method I can retrieve that index to update the state like below</li>
             </ol> <br>
             <textarea name="" id="" cols="100" rows="7" class="code">
-                
+deletePersonHandler = (index)=> {
+    const persons = this.state.person;
+    persons.splice(index, 1);
+    
+    this.setState({
+        person: persons
+    });
+}
             </textarea>
+        </p> <br><br>
+
+        <h4>Update States Immutably</h4> <br>
+        <p class="comments">
+            <b>Note: </b> The above approach of removing elements from the state has a flow. <br>
+            <ol>
+                <li>In JS arrays and object are reference type and doing so we do not actually get a pointer to the state managed directly by React.</li>
+                <li>When we splice it (see above) we already mutate the original data and this should be done in react only using <b>setState</b></li>
+                <li>Instead of creating a reference (const persons = this.state.person;) we should create a copy of the array and use the copy to
+                    make changed and the copy to update the state once done.
+                </li>
+                <li>This can be done in JS by using <b>slice</b> method: <b class="code">const persons = this.state.person.slice();</b></li>
+                <li>Another approach could be using the <b>spread operator</b> in JS: <b class="code">const persons = [...this.state.person];</b></li>
+                <li>Example:</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="10" class="code">
+deletePersonHandler = (index)=> {
+    // using the spread operator to copy the array
+    const persons = [...this.state.person];
+    persons.splice(index, 1);
+    
+    this.setState({
+        person: persons
+    });
+}
+            </textarea>
+        </p> <br><br>
+
+        <h4>Flexible Lists</h4> <br>
+        <p class="comments">
+            
         </p>
         
     </div>

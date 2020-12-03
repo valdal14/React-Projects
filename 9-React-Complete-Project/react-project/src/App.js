@@ -26,7 +26,6 @@ class App extends Component {
     showPerson: false
   }
 
-  // FROM HERE ......
   nameChangedHandler = (event)=>{
     console.log(event.target.value);
   }
@@ -44,7 +43,13 @@ class App extends Component {
   }
 
   deletePersonHandler = (index)=> {
-    console.log(this.state.person[index])
+    // using the spread operator to copy the array
+    const persons = [...this.state.person];
+    persons.splice(index, 1);
+    
+    this.setState({
+      person: persons
+    });
   }
 
   render(){
