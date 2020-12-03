@@ -2880,6 +2880,37 @@ render(){
     );                
             </textarea>
         </p> <br><br>
+
+        <h4>Events on Lists</h4> <br>
+        <p class="comments">
+            <b>Use-case</b> Delete a person from the list we previously rendered <br>
+            <ol>
+                <li>Let's start by creating a <b>deletePersonHandler</b> method inside the <b>App</b> component</li>
+                <li>Add the following <b>onClick</b> to the <b>Person</b> component</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="1" class="code">
+<p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+            </textarea> <br>
+            <ol>
+                <li>Add the <b>props</b> named <b>deletePerson</b> to the <b>Person</b> component inside the list like so: </li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="3" class="code">
+<Person key={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this) } style={ personStyle } />
+            </textarea> <br>
+            <ol>
+                <li>The JS method <b>map</b> exposes a second argument that is the <b>index</b> of the array</li>
+                <li>We can pass that second argument directly into the <b>deletePerson</b> handler props to access the index like below:</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="3" class="code">
+deletePerson={ this.deletePersonHandler.bind(this, index) }
+            </textarea> <br>
+            <ol>
+                <li>Finally inside the <b>deletePersonHandler</b> method I can retrieve that index to update the state like below</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="7" class="code">
+                
+            </textarea>
+        </p>
         
     </div>
     <!-- END OF REACT JS -->

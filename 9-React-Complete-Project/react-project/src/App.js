@@ -43,6 +43,10 @@ class App extends Component {
     }
   }
 
+  deletePersonHandler = (index)=> {
+    console.log(this.state.person[index])
+  }
+
   render(){
     // Inline styles with JS
     const style = {
@@ -52,25 +56,25 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    const personStyle = {
+      cursor: 'pointer'
+    }
+
     // Using pure JS to render JSX or React.createElement based on conditions
     let people = null;
 
     if (this.state.showPerson) {
       // Use map to generate JSX code li elements with Person Component inside it and event handler
-      const listOfPeople = this.state.person.map((p) => {
+      const listOfPeople = this.state.person.map((p, index) => {
         return(
-          <li key={p.id}>
-            <Person name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } />
-          </li>
+            <Person key={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
         );
       });
 
       // Create a JSX with the array of people in the state
       people = (
         <div>
-          <ol>
             { listOfPeople }
-          </ol>
         </div>
       )
     }
