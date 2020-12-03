@@ -1,4 +1,5 @@
 // imported the useState Hook from React
+import { type } from 'jquery';
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -26,8 +27,24 @@ class App extends Component {
     showPerson: false
   }
 
+  // FROM HERE....
   nameChangedHandler = (event)=>{
-    console.log(event.target.value);
+    const modifiedPerson = [];
+    for (let i = 0; i < this.state.person.length; i++) {
+      if(this.state.person[i].id === parseInt(event.target.id)) {
+        modifiedPerson.push({
+          id: parseInt(event.target.id),
+          name: event.target.value,
+          age: 0
+        })
+      } else {
+        
+        modifiedPerson[i] = this.state.person[i];
+      }
+    }
+    this.setState({
+      person: modifiedPerson
+    })
   }
 
   togglePersonHandler = () => {
@@ -72,7 +89,7 @@ class App extends Component {
       // Use map to generate JSX code li elements with Person Component inside it and event handler
       const listOfPeople = this.state.person.map((p, index) => {
         return(
-            <Person key={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
+            <Person key={p.id} id={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
         );
       });
 
