@@ -2945,9 +2945,132 @@ deletePersonHandler = (index)=> {
             </textarea>
         </p> <br><br>
 
-        <h4>Flexible Lists</h4> <br>
+        <h3>Styling React Components</h3> <br>
         <p class="comments">
-            
+            <b>Note:</b> using JS variable object to create inline style does not allow us to use <b>pseudo-selectors</b> like <b>link:hover</b>
+        </p>
+
+        <h4>Dynamically set Components styles</h4> <br>
+        <p class="comments">
+            We can use JS to reach out our previously created <b>style</b> variable and access to its properties to change value. We 
+            can do this inside a conditional statement for instance: <p class="code">style.backgroundColor = 'red';</p>
+        </p> <br>
+
+        <h4>Change CSS Classes Dynamically</h4> <br>
+        <p class="comments">
+            <b>Use case:</b> Suppose we want to change a CSS inside an element/component <br>
+            Also in this case we can use JS to handle this. <br>
+            <textarea name="" id="" cols="100" rows="8" class="code">
+let cssClasses = ['red', 'bold'].join(' '); 
+
+// And use the ternary operator to handle a condition and update the style
+<p className={this.state.person.length >= 2 ? {cssClasses} : 'blue'}>List of People</p>
+            </textarea>
+        </p> <br><br>
+
+        <h4>Use pseudo-selectors & media-queries</h4> <br>
+        <p class="comments">
+            We can do this using a third-party package called <b>radium</b> in our web-app <br>
+            <ol>
+                <li>yarn add radium</li>
+                <li><b>Radium</b> must be imported directly in the file we need to use it</li>
+                <ol>
+                    <li class="code">import Radium from 'radium';</li>
+                </ol>
+                <li>Finally we modify the import using the <b>high-order component</b> syntax</li>
+                <ol>
+                    <li class="code">export default Radium(App);</li>
+                </ol>
+                <li><b>Radium</b> and the <b>high-order component</b> syntax can be used with both Class as well as Functional Components</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="10" class="code">
+// use Radium to add pseudo-selectors inside a React-Component
+const style = {
+    backgroundColor: 'green',
+    color: 'white',
+    border: '1px solid blue',
+    padding: '8px',
+    cursor: 'pointer',
+    // Using Radium pseudo-selectors
+    ':hover': {
+      backgroundColor: 'blue',
+      color: 'white'
+    }
+  };
+
+  // re-assign the hover pseudo-selector
+  style[':hover'] = {
+    backgroundColor: 'salmon',
+    color: 'black'
+  }
+
+            </textarea> <br>
+
+            <h5>Media-Queries with Radium</h5> <br>
+            <ol>
+                <li>To work with <b>media-queries</b> inside a JS Component we can create a new <b>style variable and add the following Radium syntax</b></li>
+                <li>We will be using it inside the <b>Person</b> Component this time</li>
+                <li><b>Note</b> Wrapping a component with <b class="code">export default Radium(componentName)</b> is ok with <b>pseudo-selector</b>
+                it will not work with <b>Media-Queries or animation with keyframes</b> therefore we must wrapp the <b>Root Component (App)</b> using the Radium <b>StyleRoot</b> Component
+                </li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="50" class="code">
+// Person Component ----------------------------------------------
+
+import React from 'react';
+import './Person.css';
+import Radium from 'radium';
+
+// React must be imported since the following will be converted in React.createElement and JSX
+// We do not need to import Component tho since we are not using a class
+
+// We must use props parameter inside our functional component to be able to create props.name and props.age
+const person = (props) => {
+    
+    const style = {
+        '@media screen (min-width: 500px)' : {
+            width: '450px'
+        }
+    };
+
+    return (
+        <div className='Person' style={style}>
+            <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
+            <p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+            <p>{props.children}</p>
+        </div>
+    )
+};
+
+export default Radium(person);
+
+// APP Component ----------------------------------------------
+
+import Radium, { StyleRoot } from 'radium';
+return (
+    <StyleRoot>
+    <div className="App">
+        <h1>Welcome to this React Project</h1>
+        <p className={this.state.person.length >= 2 ? {cssClasses} : 'blue'}>List of People</p>
+        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
+
+        {/* Calling the method to to return JSX based on the state condition */}
+        { people }
+
+    </div>
+    </StyleRoot>
+);
+            </textarea>
+        </p> <br><br>
+
+        <h4>Styled Components</h4> <br>
+        <p class="comments">
+            Another very useful third-party library to style our React components is called <b>styled-components</b> <br>
+            <a href="https://styled-components.com/" target="_blank">styled-components</a>
+            <ol>
+                <li class="code">yarn add styled-components</li>
+                <li class="code">import styled from 'styled-components';</li>
+            </ol>
         </p>
         
     </div>

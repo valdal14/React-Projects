@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import styled from 'styled-components';
 class App extends Component {
   // React state
   state = {
@@ -25,7 +26,6 @@ class App extends Component {
     showPerson: false
   }
 
-  // FROM HERE....
   nameChangedHandler = (event)=>{
     const modifiedPerson = [];
     for (let i = 0; i < this.state.person.length; i++) {
@@ -70,10 +70,16 @@ class App extends Component {
   render(){
     // Inline styles with JS
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      // Using Radium pseudo-selectors
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'white'
+      }
     };
 
     const personStyle = {
@@ -91,6 +97,12 @@ class App extends Component {
         );
       });
 
+      style.backgroundColor = 'red';
+      // re-assign the hover pseudo-selector
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'red'
+      }
       // Create a JSX with the array of people in the state
       people = (
         <div>
@@ -99,15 +111,18 @@ class App extends Component {
       )
     }
     
+    let cssClasses = ['red', 'bold'].join(' ');
 
     return (
-      <div className="App">
-        <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
+        <div className="App">
+          <h1>Welcome to this React Project</h1>
+          <p className={this.state.person.length >= 2 ? {cssClasses} : 'blue'}>List of People</p>
+          <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
 
-        {/* Calling the method to to return JSX based on the state condition */}
-        { people }
+          {/* Calling the method to to return JSX based on the state condition */}
+          { people }
 
-      </div>
+        </div>
     );
   }
 }
