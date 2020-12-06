@@ -3115,6 +3115,9 @@ export default person;
 
         <h1>CSS Modules</h1> <br>
         <p class="comments">
+            <a href="https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2">CSS Modules</a>
+        </p>
+        <p class="comments">
             <b>Use case:</b> Ass css style only to Component's elements and not globally. (I want to add a specific style just to a specific button but not to all of my buttons) <br>
             <ol>
                 <li>We need to tweak the underline configuration in order to use <b>CSS MODULES</b></li>
@@ -3126,6 +3129,64 @@ export default person;
                 </ol>
                 <li>Inside the <b>config folder</b> we can find the file <b>webpack.config.js</b></li>
             </ol> <br>
+        </p> <br><br>
+
+        <h4>Debugging</h4> <br>
+        <p class="comments">
+            We can debug our React-app using the browser directly. We can open the console and in the source tab access to the App.js file and set breakpoints <br><br>
+            <img src="images/debugging.png" alt="debugging" srcset="">
+        </p> <br>
+
+        <h4>Error Boundary Component</h4> <br>
+        <a href="https://reactjs.org/docs/error-boundaries.html">Error Boundaries</a> <br>
+        <p class="comments">
+            <ol>
+                <li>Create a folder named <b>ErrorBoundary</b> inside the <b>src</b> folder</li>
+                <li>Inside <b>ErrorBoundary</b> create a JS file called <b>ErrorBoundary.js</b></li>
+                <li>Create a Class Component that will return the content only if we get an error</li>
+                <li>We will use the React method <b>componentDidCatch(error, info)</b> that will be executed any time we catch an error on a Component we wrapped inside  <b>ErrorBoundary</b></li>
+                <li>We finally import <b>ErrorBoundary</b> inside our App component and wrap the <b>Person</b> Component with <b>ErrorBoundary</b></li>
+            </ol> <br><br>
+            <textarea name="" id="" cols="100" rows="40" class="code">
+// ErrorBoundary.js 
+
+import React, { Component } from 'react';
+
+class ErrorBoundary extends Component {
+    state = {
+        hasError: false,
+        errorMessage: ''
+    }
+
+    // React method
+    componentDidCatch = (error, info) => {
+        this.setState({
+            hasError: true,
+            errorMessage: error
+        })
+    }
+
+    render(){
+        if(this.state.hasError) {
+            return <h1>{ this.state.errorMessage }</h1>;
+        } else {
+            // refers to any elements between the opening and closing tag of our Components
+            return this.props.children;
+        }
+        
+    }
+}
+
+export default ErrorBoundary;
+
+// App.js
+
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+<ErrorBoundary key={p.id}>
+    <Person id={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
+</ErrorBoundary>
+
+            </textarea>
         </p>
         
     </div>

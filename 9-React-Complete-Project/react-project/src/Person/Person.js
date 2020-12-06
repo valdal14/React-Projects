@@ -8,10 +8,16 @@ import './Person.css';
 const person = (props) => {
     
     const style = {
-        '@media (min-width: 500px)' : {
+        '@media (minWidth: 500px)' : {
             width: '450px'
         }
     };
+
+    const num = Math.random();
+
+    if(num > 0.7) {
+        throw new Error('Something went wrong');
+    }
 
     return (
         <div className='Person' style={style}>

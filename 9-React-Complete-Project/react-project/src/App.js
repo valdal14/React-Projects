@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   // React state
@@ -93,7 +94,9 @@ class App extends Component {
       // Use map to generate JSX code li elements with Person Component inside it and event handler
       const listOfPeople = this.state.person.map((p, index) => {
         return(
-            <Person key={p.id} id={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
+          <ErrorBoundary key={p.id}>
+            <Person id={p.id} name={ p.name } age={ p.age } changeName={ this.nameChangedHandler.bind(this) } deletePerson={ this.deletePersonHandler.bind(this, index) } style={ personStyle } />
+          </ErrorBoundary>
         );
       });
 
@@ -121,7 +124,6 @@ class App extends Component {
 
           {/* Calling the method to to return JSX based on the state condition */}
           { people }
-
         </div>
     );
   }
