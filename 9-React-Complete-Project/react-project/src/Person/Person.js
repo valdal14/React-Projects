@@ -12,13 +12,7 @@ const person = (props) => {
             width: '450px'
         }
     };
-
-    const num = Math.random();
-
-    if(num > 0.7) {
-        throw new Error('Something went wrong');
-    }
-
+    
     return (
         <div className='Person' style={style}>
             <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
