@@ -1,9 +1,12 @@
-const { generateText, createElement, validateUser } = require('./util');
+const { generateText, createElement, validateUser, fetchData } = require('./util');
 
 const initApp = () => {
   // Initializes the app, registers the button click listener
   const newUserButton = document.querySelector('#btnAddUser');
   newUserButton.addEventListener('click', addUser);
+
+  const postButton = document.querySelector('#btnGetPosts');
+  postButton.addEventListener('click', getPostById);
 };
 
 const addUser = () => {
@@ -28,6 +31,16 @@ const addUser = () => {
     userList.appendChild(element);
   }
 };
+
+const getPostById = async (e)=>{
+    e.preventDefault();
+    const id = document.querySelector('#post').value;
+    const data = await fetchData(id);
+    console.log(data);
+    const element = createElement('div', data.body, 'posts');
+    const appendPost = document.querySelector('#post-list');
+    appendPost.appendChild(element);
+}
 
 // Start the app!
 initApp();

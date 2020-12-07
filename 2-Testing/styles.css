@@ -48,3 +48,14 @@ body {
   .form-error {
     color: red;
   }
+  
+  .posts {
+    width: 60%;
+    margin: 0 auto;
+    border: 1px solid #eeeeee;
+    box-shadow: 0 2px 3px #cccccc;
+    padding: 16px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
