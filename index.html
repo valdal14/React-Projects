@@ -19,6 +19,7 @@
     <div class="container">
         <h2>Agenda</h2> <br>
         <ol>
+            <li><a href="#testing">TDD</a></li>
             <li><a href="#javascriptRefresh">Next Gen JavaScript</a></li>
             <li><a href="#gitSection">GIT</a></li>
             <li><a href="#bootstrapSection">Bootstrap</a></li>
@@ -29,6 +30,132 @@
             <li><a href="#reactSection">React JS & React-Bootstrap</a></li>
         </ol>
     </div>
+
+    <!-- TDD -->
+    <div class="jumbotron" id="#testing">
+        <h1>TDD</h1>
+    </div>
+
+    <div class="container">
+        <h4>Project Setup</h4> <br>
+        <p>Link to the project: <a href="./2-Testing/index.html" target="_blank">Testing</a></p>
+        <p class="comments">
+            We start installing the following dependences to a base <b>nodejs</b> project <br>
+            <b class="code">npm install webpack webpack-cli jest puppeteer --save-dev</b> <br> <br>
+            The nodejs <b>package.json</b> script: <br>
+            <textarea name="" id="" cols="100" rows="12" class="code">
+"scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.js"
+    },
+
+// webpack.config.js configuration
+const path = require("path");
+
+module.exports = {
+  entry: { app: path.resolve(__dirname, "app.js") }
+};
+            </textarea>
+        </p> <br><br>
+
+        <h4>Unit Testing</h4> <br>
+        <p class="comments">
+            <p class="comments">
+                npm test 
+            </p>
+            <textarea name="" id="" cols="100" rows="22" class='code'>
+// util.js export in nodejs style
+exports.generateText = (name, age) => {
+    // Returns output text
+    return `${name} is ${age} years old`;
+  };
+
+// util.test.js import in nodejs style
+const generateText = require('./util').generateText;
+
+// first unit test
+test('should return a string made of name and age', ()=> {
+    const res = generateText('Val', 42);
+    expect(res).toBe('Val is 42 years old');
+});
+
+// second unit test
+test('name and age should be valid variables', ()=> {
+    const name = 'Val';
+    const age = 42;
+    const res = generateText(name, age);
+    expect(res).toBe(`${name} is ${age} years old`);
+});
+            </textarea>
+        </p> <br><br>
+
+        <h4>Integration Test</h4> <br>
+        <p class="comments">
+            <textarea name="" id="" cols="100" rows="24" class="code">
+// app.js
+const valid = validateUser(newUserNameInput.value, newUserAgeInput.value);
+
+// util.js
+const validateUsername = (name)=> {
+    return name.length >= 1 ? true : false;
+}
+
+const validateAge = (age)=> {;
+    return parseInt(age) ? true : false;
+}
+
+exports.validateUser = (name, age)=> {
+    return validateUsername(name) && validateAge(age) ? true : false;
+};
+
+// util.test.js
+// Integration test
+test('Integration test: return true if user and age are valid', ()=>{
+    const name = 'Val';
+    const age = 42;
+    expect(validateUser(name, age)).toBe(true);
+});
+            </textarea>
+        </p> <br><br>
+
+        <h4>End to end Test</h4> <br>
+        <p class="comments">
+            We will configure <b>puppeteer</b> in order to execute the <b>End to End</b> test <br>
+            <b>puppeteer</b> allow us to run a chromium browser (headless or not) and execute specific commands <br> <br>
+            <ol>
+                <li>first we will import <b>puppeteer</b> inside our test file <b>util.test.js</b></li>
+                <ol>
+                    <li class="code">const puppeteer = require('puppeteer');</li>
+                </ol>
+                <li>And we create a new test:</li>
+            </ol> <br>
+
+            <textarea name="" id="" cols="100" rows="19" class="code">
+// End to End testing
+test('Testing user form data-entry and click', async ()=>{
+    // Setup a browser instance
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: true,
+        args: ['--window-size=1920,1080']
+    })
+    // Create a page object
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3001/2-Testing/index.html');
+    // Add commands
+    await page.click('input#name');
+    await page.type('input#name', 'Valerio');
+    await page.click('input#age');
+    await page.type('input#age', '42');
+    await page.click('#btnAddUser');
+});
+            </textarea> <br><br>
+            <img src="/images/testing-etoe.png" alt="testing" srcset="">
+        </p>
+
+
+    </div>
+    <!-- END OF TDD -->
 
     <!-- NEXT GEN JS -->
     <div class="jumbotron" id="javascriptRefresh">
