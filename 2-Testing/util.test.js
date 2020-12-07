@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const generateText = require('./util').generateText;
 const validateUser = require('./util').validateUser;
+const fetchData = require('./util').fetchData;
 
 
 test('should return a string made of name and age', ()=> {
@@ -39,4 +40,27 @@ test('Testing user form data-entry and click', async ()=>{
     await page.click('input#age');
     await page.type('input#age', '42');
     await page.click('#btnAddUser');
+});
+
+// Async Tests with puppeteer
+test('The get request should return an object with some properties', async ()=>{
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: true,
+        args: ['--window-size=1920,1080']
+    })
+    // Create a page object
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3001/2-Testing/index.html');
+    // Add commands
+    await page.click('input#post');
+    await page.type('input#post', '1');
+    await page.click('#btnGetPosts');
+    const text = setTimeout(async ()=> {
+        const res = await page.$eval('#post-list', e => e.children[0].textContent);
+        return res
+    }, 2000);
+
+    console.log(text);
+    //expect(text).toBe('Prova');
 });
