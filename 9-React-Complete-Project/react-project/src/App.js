@@ -4,27 +4,40 @@ import Person from './Person/Person';
 import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
-  // React state
-  state = {
-    person: [
-      {
-        id: 0,
-        name: 'Valerio',
-        age: 42
-      },
-      {
-        id: 1,
-        name: 'Lefemas',
-        age: 45
-      },
-      {
-        id: 2,
-        name: 'missilotta',
-        age: 0
-      },
-    ],
-    // new state variable
-    showPerson: false
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+
+    this.state = {
+      person: [
+        {
+          id: 0,
+          name: 'Valerio',
+          age: 42
+        },
+        {
+          id: 1,
+          name: 'Lefemas',
+          age: 45
+        },
+        {
+          id: 2,
+          name: 'missilotta',
+          age: 0
+        },
+      ],
+      // new state variable
+      showPerson: false
+    }
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js] componentDidMount');
   }
 
   nameChangedHandler = (event)=>{
@@ -69,6 +82,7 @@ class App extends Component {
   }
 
   render(){
+    console.log('[App.js] render');
     // Inline styles with JS
     const style = {
       backgroundColor: 'green',
