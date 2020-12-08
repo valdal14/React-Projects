@@ -155,7 +155,46 @@ test('Testing user form data-entry and click', async ()=>{
 
         <h4>Mocking - Testing Async code</h4> <br>
         <p class="comments">
-            <b>Use-case:</b> Testing async dependences mocking the request to an external web-server
+            <b>Use-case:</b> Testing async dependences mocking the request to an external web-server. <br>
+            We usually replace our calls to external endpoints mocking the requests. <br>
+            <ol>
+                <li>We create an <b>__mocks__</b> folder next to the file that contains our real-source code</li>
+                <li>Inside the <b>__mocks__</b> we add our <b>util.js</b> files that contains the fetch request we want to mock</li>
+            </ol> <br><br>
+
+            <textarea name="" id="" cols="100" rows="30" class="code">
+// __mocks__/util.js
+
+// Mock our fetch request
+exports.fetchData = ()=> {
+    return Promise.resolve({
+        body: 'quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto' 
+    })
+}
+
+// util.test.js
+
+// Async Tests with puppeteer
+test('The get request should return an object with a body property', async ()=>{
+    const browser = await puppeteer.launch({
+        headless: false,
+        slowMo: true,
+        args: ['--window-size=1920,1080']
+    })
+    // Create a page object
+    const page = await browser.newPage();
+    await page.goto('http://localhost:3001/2-Testing/index.html');
+    // Add commands
+    await page.click('input#post');
+    await page.type('input#post', '1');
+    await page.click('#btnGetPosts');
+    // the mocked fetch request
+    fetchData().then(data => {
+        expect(data.body).toBe('quia et suscipit suscipit recusandae consequuntur expedita et cum reprehenderit molestiae ut ut quas totam nostrum rerum est autem sunt rem eveniet architecto')
+    })
+});
+
+            </textarea>
         </p>
 
 
