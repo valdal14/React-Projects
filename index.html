@@ -3360,22 +3360,74 @@ import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
             </textarea>
         </p> <br><br>
 
+        <h4>Class-Based VS Functional Components</h4> <br>
+        <p class="comments">
+            <img src="images/funcVSClass.png" alt="FuncVSClass">
+        </p> <br>
+
         <h4>Components Lifecycle</h4> <br>
         <p class="comments">
             We will see the difference between <b>Class-based</b> & <b>Functional</b> Components, but we will start with Class-based. <br>
             <ol>
                 <li><b>Note: </b> The below list os only available for <b>Class-based Components</b> <br></li>
-                <li>componentWillMount will be soon removed and it can be reaplced with <b class="code">getDerivedStateFromProps(props, state)</b></li>
+                <li><b class="code">componentWillMount</b> will be soon removed and it can be reaplced with <b class="code">getDerivedStateFromProps(props, state)</b> added with React 16.0</li>
+                <li>
+                    <b class="code">getDerivedStateFromProps(props, state)</b> Whenever our <b>props</b> change on our class-based component we can synch
+                    our state to them. (Not used a lot in production and never used to send HTTP requests)
+                </li>
+                <li><b class="code">static getDerivedStateFromProps(props, state)</b> is a static method and returns the updated state</li>
+                <li><b class="code">componentDidMount()</b> instead can be used to execute HTTP requests for instance. What we shoud not do it here is update a state.</li>
+                <li><b>Note: </b> if we use a class-based component and we explicity add a <b>construct</b> we must also add/call the <b class="code">super(props)</b></li>
             </ol> <br>
             <img src="/images/lifecycle-class.png" alt="Class based comp lyfecycle"> <br> <br>
             <img src="/images/class-based-lifecycle.png" alt="Creation"> <br><br>
         </p> <br><br>
 
-        <h4>Components Lifecycle - Update</h4> <br>
+        <h4>Components Lifecycle - Update (For Props & States changes)</h4> <br>
         <img src="/images/class-lifecycle-update.png" alt="Class lifecycle update"> <br><br>
         <p class="comments">
-            
-        </p>
+            <ol>
+                <li><b class="code">shouldComponentUpdate(nextProps, nextState)</b> can be used to cancel the update process</li>
+                <li><b class="code">getSnapshotBeforeUpdate(prevProps, prevState)</b> return a snapshot object. Can be used for last minute DOM operations such as get current scrolling position. (Not for state update tho) </li>
+                <li>When we return a <b>snapshot</b> from <b class="code">getSnapshotBeforeUpdate(prevProps, prevState)</b> we can use it inside the <b class="code">componentDidUpdate(prevProps, prevState, snapshot)</b></li>
+            </ol> <br>
+            <textarea class="code" cols="100" rows="40">
+class Person extends Component {
+
+    constructor(props) {
+        super(props);
+        this.style = {
+            '@media (minWidth: 500px)' : {
+                width: '450px'
+            }
+        }
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log('Person-Component: getSnapshotBeforeUpdate - Props: ' + this.props + ' State: ' + null);
+        return {message: 'Snapshot of the props'};
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('Person-Component: componentDidUpdate - Props: ' + prevProps + ' State: ' + prevState + ' Snapshot: ' + snapshot);
+    }
+
+    render() {
+        return (
+            <div className='Person' style={this.style}>
+                { console.log('[Person] rendering...') }
+                <input type='text' onChange={ this.props.changeName } defaultValue={this.props.name} id={this.props.id} />
+                <p onClick={ this.props.deletePerson }>My name is {this.props.name} and I am {this.props.age}</p>
+                <p>{this.props.children}</p>
+            </div>
+        )
+    }
+    
+}
+            </textarea>
+        </p> <br><br>
+
+        
         
     </div>
     <!-- END OF REACT JS -->

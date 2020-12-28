@@ -132,7 +132,7 @@ class App extends Component {
 
     return (
         <div className="App">
-          <h1>Welcome to this React Project</h1>
+          <h1>{this.props.appTitle}</h1>
           <p className={this.state.person.length >= 2 ? {cssClasses} : 'blue'}>List of People</p>
           <button style={style} onClick={ this.togglePersonHandler }>Show People</button>
 
