@@ -3427,7 +3427,62 @@ class Person extends Component {
             </textarea>
         </p> <br><br>
 
-        
+        <h4>useEffect Hook - Functional Component Lifecycle</h4> <br>
+        <p class="comments">
+            <ol>
+                <li><b class="code">useEffect</b> can be used in Functional Components to replicate all behaviour of the classic class-based Components<li>
+                <li><b class="code">useEffect</b> by default takes a function that will run for every render cycle included the first render</li>
+                <li>As a second argument we can pass an array that points to all the variables/data are used inside the <b class="code">useEffect</b> call</li>
+                <li>we can add [props.person] and it will be executed only when a Person component changes</li>
+                <li>We can use it more than once inside the body of our functional component</li>
+                <li><b>Note:</b> If we pass an empty array the <b class="code">useEffect</b> hook will be only triggered once</li>
+            </ol>
+        </p> <br>
+        <textarea name="" id="" cols="100" rows="15" class="code">
+// Only triggered when the props changes
+useEffect(()=> {
+    setTimeout(()=>{
+        alert('useEffect executing - Data has been saved!!!');
+    }, 1000)
+}, [props.changeName]);
+
+// Only triggered the first render cycle
+
+useEffect(()=> {
+    setTimeout(()=>{
+        alert('useEffect executing - Data has been saved!!!');
+    }, 1000)
+}, []);
+        </textarea> <br><br>
+
+        <h4>Clean-up work with Class-Based & Functional Components</h4><br>
+        <p class="comments">
+            <b>Use case: Clenaing up our code when a component gets removed: </b>
+            <ol>
+                <li><b>Class-Based Component:</b></li>
+                <ol>
+                    <li>We can use <b class="code">componentWillUnmount()</b></li>
+                </ol>
+                <li><b>Functional Component:<b></li>
+                    <ol>
+                        <li><b class="code">useEffect()</b> can be also used to reproduce the behavior of <b class="code">componentWillUnmount()</b></li>
+                        <li>Inside the closure created inside the <b>useEffect</b> hook we can return an anonimous function that will be executed after every render function</li>
+                        <li><b>Note: </b>Remember this is strictly tied to the second argument we passed inside <b>useEffect</b>. If we pass the empty array the clean up will be exeecuted when the component will be removed. If we do not pass anything it will be executed for every render cycle as we have seen it above.</li>
+                    </ol>
+            </ol> <br>
+        <textarea name="" id="" cols="100" rows="10" class="code">
+useEffect(()=> {
+    setTimeout(()=>{
+        alert('useEffect executing - Data has been saved!!!');
+    }, 1000)
+
+    return ()=> {
+        // clean up with useEffect
+        console.log('cleaning up the Person component')
+    };
+}, []);
+        </textarea> <br><br>   
+        </p>
         
     </div>
     <!-- END OF REACT JS -->
