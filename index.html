@@ -3491,7 +3491,17 @@ useEffect(()=> {
             <ol>
                 <li>We can wrap our exports with <b class="code">export default React.memo(Person)</b> that perform <b>memoization</b> on the wrapped component and it will re-render it only if a changes occurred.</li>
                 <li>Either ways we should be always careful adopting <b class="code">shouldComponentUpdate(nextProps, nextState)</b> or <b class="code">export default React.memo(Person)</b> since it is still code that will be executed. If we need to re-render every time we should not use them.</li>
-            </ol>
+                <li><b>Note: </b> If we want to check all <b>props</b> or <b>states</b> or events associated to a re-render we could instead of using <b>shouldComponentUpdate</b> extend our class-based component with <b class="code">PureComponent</b> instead of <b>Component</b></li>
+                <li><b class="code">PureComponent</b> already implements shouldComponentUpdate and does the check for us.</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="4" class="code">
+import React, { PureComponent } from 'react';
+            </textarea>
+        </p> <br><br>
+
+        <h4>React & DOM Update</h4> <br>
+        <p class="comments">
+            <img src="/images/domUpdate.png" alt="Dom Update" >
         </p>
         
     </div>
