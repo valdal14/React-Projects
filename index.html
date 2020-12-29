@@ -3483,6 +3483,16 @@ useEffect(()=> {
 }, []);
         </textarea> <br><br>   
         </p>
+
+        <h4>Optimizing Function Components with React.memo()</h4> <br>
+        <p class="comments">
+            As we learned, if class-based components we can use <b class="code">shouldComponentUpdate(nextProps, nextState)</b> can return true or false based on whether or not we want the DOM to be re-rendered. <br>
+            In Functional component we do not have shouldComponentUpdate but we can use <b class="code">React.memo()</b> <br>
+            <ol>
+                <li>We can wrap our exports with <b class="code">export default React.memo(Person)</b> that perform <b>memoization</b> on the wrapped component and it will re-render it only if a changes occurred.</li>
+                <li>Either ways we should be always careful adopting <b class="code">shouldComponentUpdate(nextProps, nextState)</b> or <b class="code">export default React.memo(Person)</b> since it is still code that will be executed. If we need to re-render every time we should not use them.</li>
+            </ol>
+        </p>
         
     </div>
     <!-- END OF REACT JS -->

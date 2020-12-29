@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import './Person.css';
 
 // React must be imported since the following will be converted in React.createElement and JSX
@@ -40,12 +40,13 @@ import './Person.css';
 const Person = (props) => {
     
     useEffect(()=> {
-        setTimeout(()=>{
+        const timer = setTimeout(()=>{
             alert('useEffect executing - Data has been saved!!!');
         }, 1000)
 
         return ()=> {
             // clean up with useEffect
+            clearTimeout(timer);
             console.log('cleaning up the Person component')
         };
 
@@ -67,4 +68,4 @@ const Person = (props) => {
     )
 };
 
-export default Person;
+export default memo(Person);
