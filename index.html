@@ -3583,6 +3583,85 @@ const Aux = (props) => {
 }
 export default Aux;
             </textarea>
+        </p> <br><br>
+
+        <h4>PropTypes</h4> <br><br>
+        <p class="comments">
+            <ol>
+                <li>It is used to define instruction on which props a specific component will accept and the type of props (data-type)</li>
+                <li>We can use it by installing it:</li>
+                <ol>
+                    <li>npm install --save prop-types</li>
+                    <li>yarn add prop-types</li>
+                </ol>
+                <li>We then import it into our component in which we want to add some prop-types annotation like so:</li>
+                <ol>
+                    <li class="code">import PropsType from 'prop-types';</li>
+                </ol>
+                <li>Works on both Functional and class-based Components</li>
+                <li>After the component definition (outside the body of a class or function) we can add new properties</li>
+            </ol> <br><br>
+
+            <textarea name="" id="" cols="100" rows="10" class="code">
+import PropsType from 'prop-types';
+
+Person.prototype = {
+    changeName: PropsType.func,
+    name: PropsType.string,
+    id: PropsType.number,
+    age: PropsType.number,
+    deletePerson: PropsType.func
+};
+            </textarea>
+        </p> <br><br>
+
+        <h4>Refs</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>It is used to select an HTML element from a component</li>
+                <li><b>I.E: </b>Suppose we want to add a focus on a specific input field inside a form without using regular JS</li>
+                <li>We are going to see it in action in both Functional and class-based components</li>
+            </ol>
+            <br><br>
+            <textarea name="" id="" cols="100" rows="40" class="code">
+// First Approach previous react 16.2
+
+componentDidMount(){
+    this.inputElement.focus();
+}
+
+<div className='Person' style={this.style}>
+    <input type='text' 
+    onChange={ this.props.changeName } 
+    defaultValue={this.props.name} 
+    id={this.props.id}
+    ref={(inputEl) => { this.inputElement = inputEl }}
+    />
+
+// New Approach after react 16.2 using the React.createRef() method
+
+constructor(props) {
+    super(props);
+    this.style = {
+        '@media (minWidth: 500px)' : {
+            width: '450px'
+        }
+    }
+    // using createRef to bind the inputElement to the ref
+    this.inputElement = React.createRef();
+}
+
+componentDidMount(){
+    this.inputElement.current.focus();
+}
+
+<input type='text' 
+    onChange={ this.props.changeName } 
+    defaultValue={this.props.name} 
+    id={this.props.id}
+    ref={this.inputElement}
+    />
+            </textarea>
         </p>
         
     </div>
