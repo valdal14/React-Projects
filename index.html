@@ -3661,6 +3661,36 @@ componentDidMount(){
     id={this.props.id}
     ref={this.inputElement}
     />
+            </textarea> <br><br>
+            <ol>
+                <li>In Functional Components we must import the <b>useRef</b> hook and assign the element to the <b>useRef()</b> method</li>
+            </ol>
+            <br><br>
+            <textarea name="" id="" cols="100" rows="25" class="code">
+// React Refs with Functional Components
+
+const inputElement = useRef(null);
+
+useEffect(()=> {
+    inputElement.current.focus()
+
+    // unmount the component
+    return ()=> {
+        console.log('Unmounting the Person Component');
+    };
+
+    // will execute just once
+}, []);
+
+
+<div className='Person' style={style}>
+    <input type='text' 
+    onChange={ props.changeName } 
+    defaultValue={props.name} 
+    id={props.id} 
+    ref={inputElement}
+    />
+</div>
             </textarea>
         </p>
         
