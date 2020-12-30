@@ -3502,6 +3502,87 @@ import React, { PureComponent } from 'react';
         <h4>React & DOM Update</h4> <br>
         <p class="comments">
             <img src="/images/domUpdate.png" alt="Dom Update" >
+        </p> <br><br>
+
+        <h4>HOC - High Order Components</h4> <br>
+        <p class="comments">
+            <ol>
+                <li>In React we learned that JSX/JS code in the return method must be wrapped inside a root element</li>
+                <li>A root element can be also an array storing JSX code</li>
+                <li>Each Array element tho must have a unique <b>key</b> like the below example</li>
+            </ol>
+            <textarea name="" id="" cols="100" rows="20" class="code">
+// FROM THIS.....
+return (
+    <div className='Person' style={style}>
+        { console.log('[Person] rendering...') }
+        <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
+        <p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+        <p>{props.children}</p>
+    </div>
+)
+
+// TO THIS USING ARRAY..... 
+return ([
+    <div className='Person' style={style} key='id1'>
+        <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
+    </div>,
+    <div className='Person' style={style} key='id2'>
+        <p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+    </div>
+])
+            </textarea> <br><br>
+            <ol>
+                <li>Another useful approach is to use <b>HOC</b> (High Order Components) Basically a React component used as wrapper but that does not return anything.</li>
+                <li>We can create a new folder named <b>hoc</b> and create an HOC like below:</li>
+                <li><b>Note:</b> Remeber that return props.children (children) that in React outputs everything inside the returning tag of this component</li>
+                <li><b>Note:</b> Since react 16.2 there is a built-in <b>Aux</b> component named Fragment</li>
+            </ol> <br><br>
+            <textarea name="" id="" cols="100" rows="24" class="code">
+// HOC
+import Aux from '../HOC/Aux'
+
+return (
+    // Note that now the key attribute is not required
+    <Aux>
+        <div className='Person' style={style}>
+            <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
+        </div>
+        <div className='Person' style={style}>
+            <p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+        </div>
+    </Aux>
+)
+
+// Using React.Fragment
+return (
+    // Note that now the key attribute is not required
+    <React.Fragment>
+        <div className='Person' style={style}>
+            <input type='text' onChange={ props.changeName } defaultValue={props.name} id={props.id} />
+        </div>
+        <div className='Person' style={style}>
+            <p onClick={ props.deletePerson }>My name is {props.name} and I am {props.age}</p>
+        </div>
+    </React.Fragment>
+)
+            </textarea> <br><br>
+
+            <ol>
+                <li>We can create custom HOC that may contains JSX code such as className and so on.</li>
+            </ol> <br>
+            <textarea name="" id="" cols="100" rows="8" class="code">
+import React from 'react';
+
+const Aux = (props) => {
+    return(
+        <div className={props.componentClassName}>
+            {props.children}
+        </div>
+    )
+}
+export default Aux;
+            </textarea>
         </p>
         
     </div>
